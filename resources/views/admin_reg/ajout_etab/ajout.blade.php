@@ -28,7 +28,7 @@
                             <div class="form-group row">
                                 <div class="col">
                                     <label class="">Province : <span style="color: red">*</span></label>
-                                    <select class="form-control province" id="province">
+                                    <select class="form-control province" name="province" id="province">
                                          <option value="">Sélectionnez une province</option> 
                                          @foreach ($provinces as $province)
                                             <option value="{{$province->id}}">{{$province->nom_province}}</option>
@@ -37,24 +37,17 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="">Région : <span style="color: red">*</span></label>
-                                    <select class="form-control region" id="region">
-                                        {{-- <option value="">Sélectionnez une région</option> --}}
+                                    <select class="form-control region" name="region" id="region">
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label class="">District :</label>
-                                    <select class="form-control" id="district">
-                                        {{-- @foreach ($districts as $district)
-                                            <option value="{{$district->district}}">{{$district->district}}</option>
-                                        @endforeach --}}
+                                    <select class="form-control" name="district" id="district">
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label class="">Commune :</label>
-                                    <select class="form-control" id="commune">
-                                        {{-- @foreach ($communes as $commune)
-                                            <option value="{{$commune->commune}}">{{$commune->commune}}</option>
-                                        @endforeach --}}
+                                    <select class="form-control" name="commune" id="commune">
                                     </select>
                                 </div>
                                
@@ -95,11 +88,6 @@
                                   <label class="col-sm-2 col-form-label">Fokontany : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
                                         <select class="form-control" required name="fokontany_id" id="fokontany"  >
-                                            {{-- @foreach ($fokontanis as $fokotany)
-                                            <option value="{{ $fokotany->id }}"  {{ old('fokontany_id') == $fokotany->id ? 'selected' : '' }}>
-                                                {{ $fokotany->fokotany }}
-                                            </option>
-                                            @endforeach --}}
                                         </select>
                                   </div>
                               </div>  
@@ -141,17 +129,32 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Fokontany : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                         <select class="form-control" required name="fokotany_id" id="fokotany_etab"  >
-                                            @foreach ($fokontanis as $fokotany)
-                                            <option value="{{ $fokotany->id }}"  {{ old('fokontany_id') == $fokotany->id ? 'selected' : '' }}>
-                                                {{ $fokotany->fokotany }}
-                                            </option>
-                                            @endforeach
-                                        </select> 
-                                  </div>
-                            </div> 
+                                <div class="col-sm-4">
+                                    <label class="">Région :</label>
+                                    <select class="form-control" readonly name="region_etab" id="region_etab">
+                                        <option value="{{$region_user->id}}">{{$region_user->region}}</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">District :</label>
+                                    <select class="form-control" name="district_etab" id="district_etab">
+                                        @foreach ($district_users as $district_user)
+                                        <option value="{{$district_user->id}}">{{$district_user->district}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Commune :</label>
+                                    <select class="form-control" name="commune_etab" id="commune_etab">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">fokontany :</label>
+                                    <select class="form-control" name="fokontany_etab" id="fokontany_etab">
+                                    </select>
+                                </div>
+                               
+                            </div>  
                             <div class="form-group row">
                                 <label class="">  </label>
                                 <label class="col-sm-2 col-form-label">Fond (en 1000 Ar): <span style="color: red">*</span></label>
@@ -215,39 +218,125 @@
                             <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Activité Principal : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
-                                        {{-- <select class="form-control" required name="activite_id" id="activite_etab"  >
-                                            @foreach ($activites as $activite)
-                                            <option value="{{ $activite->id }}" {{ old('activite_id') == $activite->id ? 'selected' : '' }}>
-                                                {{ $activite->id."-".$activite->description }}
-                                            </option>
-                                            @endforeach
-                                        </select> --}}
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité Principal " name="activite_0" id="activite_0">
+                                    </div>
                                   </div>
                             </div> 
                             <div class="form-group row">
+                                <div class="col">
+                                    <label class="">Section:</label>
+                                    <select class="form-control"  name="section_0" id="section_0">
+                                        <option value="">Sélectionner une section</option>
+                                        @foreach ($sections as $section)
+                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option> 
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Division :</label>
+                                    <select class="form-control" name="division_0" id="division_0">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Groupe :</label>
+                                    <select class="form-control" name="groupe_0" id="groupe_0">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Classe :</label>
+                                    <select class="form-control" name="classe_0" id="classe_0">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Categorie :</label>
+                                    <select class="form-control" name="categorie_0" id="categorie_0">
+                                    </select>
+                                </div>
+                               
+                            </div>  
+                            <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Activité Secondaire1 :</label>
                                   <div class="col-sm-10">
-                                        {{-- <select class="form-control" required name="activite_sec1" id="activite_sec1"  >
-                                            @foreach ($activites as $activite)
-                                            <option value="{{ $activite->description }}" {{ old('activite_sec1') == $activite->description ? 'selected' : '' }}>
-                                                {{ $activite->id."-".$activite->description }}
-                                            </option>
-                                            @endforeach
-                                        </select> --}}
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire1 " name="activite_1" id="activite_1">
+                                    </div>
                                   </div>
                             </div>
                             <div class="form-group row">
+                                <div class="col">
+                                    <label class="">Section:</label>
+                                    <select class="form-control"  name="section_1" id="section_1">
+                                        <option value="">Sélectionner une section</option>
+                                        @foreach ($sections as $section)
+                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option> 
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Division :</label>
+                                    <select class="form-control" name="division_1" id="division_1">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Groupe :</label>
+                                    <select class="form-control" name="groupe_1" id="groupe_1">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Classe :</label>
+                                    <select class="form-control" name="classe_1" id="classe_1">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Categorie :</label>
+                                    <select class="form-control" name="categorie_1" id="categorie_1">
+                                    </select>
+                                </div>
+                               
+                               
+                            </div>  
+                            <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Activité Secondaire2 :</label>
                                   <div class="col-sm-10">
-                                        {{-- <select class="form-control" required name="activite_sec2" id="activite_sec2"  >
-                                            @foreach ($activites as $activite)
-                                            <option value="{{ $activite->description }}"{{ old('activite_sec2') == $activite->description ? 'selected' : '' }}>
-                                                {{ $activite->id."-".$activite->description }}
-                                            </option>
-                                            @endforeach
-                                        </select> --}}
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire2" name="activite_2"  id="activite_2">
+                                    </div>
                                   </div>
                             </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label class="">Section:</label>
+                                    <select class="form-control"  name="section_2" id="section_2">
+                                        <option value="">Sélectionner une section</option>
+                                        @foreach ($sections as $section)
+                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option> 
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Division :</label>
+                                    <select class="form-control" name="division_2" id="division_2">
+                                        {{-- <option value="{{}}">{{}}</option> --}}
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Groupe :</label>
+                                    <select class="form-control" name="groupe_2" id="groupe_2">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Classe :</label>
+                                    <select class="form-control" name="classe_2" id="classe_2">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Categorie :</label>
+                                    <select class="form-control" name="categorie_2" id="categorie_2">
+                                    </select>
+                                </div>
+                               
+                            </div>  
                             <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Libelle Chef : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
@@ -272,57 +361,6 @@
                                         </select>
                                   </div>
                             </div>
-                            {{-- <div class="form-group row">
-                                <div class="col-sm-2">
-                                    <label class=""></label>
-                                    <input type="hidden" />
-                                </div>
-                                <div class="col-sm-5">
-                                    <label class="">Distict :</label>
-                                    <input type="text" class="form-control form-control-bold form-control-center"  name="district_etab" id="district_etab" readonly>
-                                </div>
-                                <div class="col-sm-5">
-                                    <label class="">Region :</label>
-                                    <input type="text" class="form-control form-control-bold form-control-center"  name="region_etab" id="region_etab" readonly>
-                                </div>
-                            </div> --}}
-                            <div class="form-group row">
-                                <div class="col-sm-4">
-                                    <label class="">Région :</label>
-                                    <select class="form-control" readonly>
-                                        <option value="{{$region_user->id}}" name="region_etab">{{$region_user->region}}</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label class="">District :</label>
-                                    <select class="form-control">
-                                        @foreach ($districts as $district)
-                                            <option value="{{$district->district}}">{{$district->district}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label class="">Commune :</label>
-                                    <select class="form-control">
-                                        @foreach ($communes as $commune)
-                                            <option value="{{$commune->commune}}">{{$commune->commune}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                               
-                            </div>  
-                            {{-- <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Commune : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10"> --}}
-                                        {{-- <select class="form-control" required name="commune_id" id="commune_etab"  >
-                                            @foreach ($communes as $c)
-                                            <option value="{{ $c->id }}" {{ old('commune_id') == $c->id ? 'selected' : '' }}>
-                                                {{ $c->commune  }}
-                                            </option>
-                                            @endforeach
-                                        </select> --}}
-                                  {{-- </div>
-                            </div> --}}
                             <div class="form-group row">
                                 <div class="col-sm-2">
                                     <label class=""></label>
@@ -353,7 +391,6 @@
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label"></label>
                                   <div class="col-sm-10" >
-                                      {{-- {{Form::submit('Envoyer', ['class' => 'btn btn-outline-primary', 'id' => 'ajout_proprietaire'])}}  --}}
                                       <button type="submit" class="btn btn-outline-primary"> Ajouter</button>
                                   </div>
                               </div>
@@ -363,7 +400,6 @@
                     </div>
                 </div>
             </div>
-              <!-- tabs card end -->
              
    
 @endsection

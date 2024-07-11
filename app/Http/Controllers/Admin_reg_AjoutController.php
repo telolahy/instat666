@@ -17,6 +17,7 @@ use App\Models\Etablissement;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Section;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -58,22 +59,10 @@ class Admin_reg_AjoutController extends Controller
         $districts = District::all();
         $communes = Commune::all();
         $fokontanis = Fokontany::All();
+        $sections = Section::all();
 
-
-        $region_user = DB::table('regions')
-                        ->select('id','region')
-                        ->where('id',Auth()->user()->region_id)->first();
-        
-
-       // dd($region_user->id);
-        
-        //  $communes_etab= DB::table('communes')
-        //                  ->select('id', 'commune')
-        //                  ->where('id', Auth()->user()->region_id)
-
-
-        // $fokontany_etab = Fokontany::All();
-        // $activite_etab = Activite::All();
+        $district_users = District::getDistrictsUser();
+        $region_user = Region::getRegionsUser();
         $lchefs = Lchef::All();
         $juridiques = Juridique::All();
         $code_region = DB::table('regions')
@@ -108,6 +97,7 @@ class Admin_reg_AjoutController extends Controller
             ->with('regions', $regions)
             ->with('districts', $districts)
             ->with('provinces', $provinces)
+            ->with('district_users', $district_users)
             ->with('communes', $communes)
             ->with('region_user', $region_user)
             // ->with('fokontany_etab', $fokontany_etab) 
@@ -116,7 +106,8 @@ class Admin_reg_AjoutController extends Controller
             // ->with('communes', $communes)
             ->with('juridiques', $juridiques)
             ->with('provinces', $provinces)
-            ->with('identification_stat', $identification_stat);
+            ->with('identification_stat', $identification_stat)
+            ->with('sections', $sections);
     }
 
     /**

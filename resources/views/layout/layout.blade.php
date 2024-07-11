@@ -1038,6 +1038,10 @@
         <script src="{{asset('js/quitance.js')}}"></script>
         <script src="{{asset('js/select2.js')}}"></script>
         <script src="{{asset('js/cascade.js')}}"></script>
+        <script src="{{asset('js/cascade_etab.js')}}"></script>
+        <script src="{{asset('js/cascade_0.js')}}"></script>
+        <script src="{{asset('js/cascade_1.js')}}"></script>
+        <script src="{{asset('js/cascade_2.js')}}"></script>
         @yield('script')
 
     </body>
