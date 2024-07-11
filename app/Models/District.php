@@ -18,4 +18,13 @@ class District extends Model
     {
         return $this->hasMany(Commune::class);
     }
+
+    public static function getDistrictsUser()
+    {
+        $region_user = Auth()->user()->region_id;
+
+        $districts_user = District::where('region_id', $region_user)->get();
+
+        return($districts_user);
+    }
 }

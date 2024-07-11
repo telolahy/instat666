@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExcelController;
-use App\Http\Controllers\LchefController;
 
+use App\Http\Controllers\LchefController;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\MutantController;
 use App\Http\Controllers\CommuneController;
@@ -18,8 +19,12 @@ use App\Http\Controllers\QuitanceController;
 use App\Http\Controllers\SaisieurController;
 use App\Http\Controllers\FokontanyController;
 use App\Http\Controllers\JuridiqueController;
+use App\Http\Controllers\casacade_0Controller;
+use App\Http\Controllers\casacade_1Controller;
+use App\Http\Controllers\casacade_2Controller;
 use App\Http\Controllers\MutantExistController;
 use App\Http\Controllers\NationaliteController;
+use App\Http\Controllers\DropdownEtabController;
 use App\Http\Controllers\ProprietaireController;
 use App\Http\Controllers\Quitance_regController;
 use App\Http\Controllers\EtablissementController;
@@ -190,11 +195,32 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('add_reg_existant',AjoutAdminRegExistantController::class);
     //liste en cascade
     //province region
-    // Route::get('/regions/{province_id}', [DropdownController::class, 'getRegionsByProvince'])->name('regions.by.province');
     Route::get('/regions/{province_id}', [DropdownController::class, 'getRegions']);
     Route::get('/districts/{region_id}', [DropdownController::class, 'getDistricts']);
     Route::get('/communes/{district_id}', [DropdownController::class, 'getCommunes']);
     Route::get('/fokontanis/{commune_id}', [DropdownController::class, 'getfokontany']);
+    //region distric communes province 
+    Route::get('/communes_etab/{district_id}', [DropdownEtabController::class, 'getCommunes']);
+    Route::get('/fokontanis_etab/{commune_id}', [DropdownEtabController::class, 'getfokontany']);
+
+    //cascade activites
+    Route::get('/division_0/{section_id}', [casacade_0Controller::class, 'getDivisions']);
+    Route::get('/groupe_0/{division_id}', [casacade_0Controller::class, 'getGroupes']);
+    Route::get('/classe_0/{groupe_id}', [casacade_0Controller::class, 'getClasses']);
+    Route::get('/categorie_0/{classe_id}', [casacade_0Controller::class, 'getCategories']);
+
+    Route::get('/division_1/{section_id}', [casacade_1Controller::class, 'getDivisions']);
+    Route::get('/groupe_1/{division_id}', [casacade_1Controller::class, 'getGroupes']);
+    Route::get('/classe_1/{groupe_id}', [casacade_1Controller::class, 'getClasses']);
+    Route::get('/categorie_1/{classe_id}', [casacade_1Controller::class, 'getCategories']);
+
+    Route::get('/division_2/{section_id}', [casacade_2Controller::class, 'getDivisions']);
+    Route::get('/groupe_2/{division_id}', [casacade_2Controller::class, 'getGroupes']);
+    Route::get('/classe_2/{groupe_id}', [casacade_2Controller::class, 'getClasses']);
+    Route::get('/categorie_2/{classe_id}', [casacade_2Controller::class, 'getCategories']);
+
+    
+    
 
 
     //etablissement

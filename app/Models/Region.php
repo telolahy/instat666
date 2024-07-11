@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\District;
 use App\Models\Province;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -24,5 +25,13 @@ class Region extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public static function getRegionsUser()
+    {
+        $region_user = DB::table('regions')
+                        ->select('id','region')
+                        ->where('id',Auth()->user()->region_id)->first();
+        return ($region_user);
     }
 }
