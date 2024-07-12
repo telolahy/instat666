@@ -73,6 +73,11 @@
             background-color: transparent;
             box-shadow: none;
         }
+        hr{
+            border: none;
+            height: 1px;
+            background-color: black;
+        }
     </style>
 </head>
 
@@ -134,7 +139,7 @@
                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                                                <span class="notification-time">30 minutes ago</span>
                                            </div>
-                                       </div> 
+                                       </div>
                                    </li>
                                </ul>
                            </li> --}}
@@ -152,12 +157,12 @@
                                             </a>
                                         </li>
                                         <li>
-                                            
+
                                                 <form action="{{route('logout')}}" method="post" id="logout_form">
                                                     {{@csrf_field()}}
                                                     <button  class="btn btn-label-only w-100 text-left" type="submit"><i class="ti-layout-sidebar-left"></i> Logout</button>
                                                 </form>
-                                                
+
                                         </li>
                                     </ul>
                                 </li>
@@ -276,7 +281,7 @@
                                             <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Propietaire / <br> Etablissement</span>
                                         </a>
                                 <ul class="pcoded-submenu">
-                                            
+
                                 <li class="{{(request()->is('list_etablissement')? 'active' : '')}}">
                                     {{-- <a href={{URL::to('/list_etablissement')}}> --}}
                                     <a href="{{route('reg_etab.index')}}">
@@ -1041,7 +1046,7 @@
         <script src="{{asset('js/cascade_etab.js')}}"></script>
         <script src="{{asset('js/cascade_0.js')}}"></script>
         <script src="{{asset('js/cascade_1.js')}}"></script>
-        <script src="{{asset('js/cascade_2.js')}}"></script>
+        <script src="{{asset('js/cascade_ 2.js')}}"></script>
         @yield('script')
 
     </body>
