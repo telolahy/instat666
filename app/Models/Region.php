@@ -21,7 +21,7 @@ class Region extends Model
     {
         return $this->belongsTo(Province::class);
     }
-
+ 
     public function users()
     {
         return $this->hasMany(User::class);
@@ -33,5 +33,19 @@ class Region extends Model
                         ->select('id','region')
                         ->where('id',Auth()->user()->region_id)->first();
         return ($region_user);
+    }
+    public static function getRegionProprietaire($id)
+    {
+        $etablissement = Etablissement::with('proprietaires')->find($id);
+        $proprietaire = $etablissement->proprietaires->first();
+        $region = Region::where('id', $proprietaire->region_id)->first();
+        return ($region);
+    }
+
+    public static function getRegionEtablissement($id)
+    {
+        $etablissement = Etablissement::with('proprietaires')->find($id);
+        $region = Region::where('id', $etablissement->region_id)->first();
+        return ($region);
     }
 }

@@ -32,22 +32,22 @@ List Commune
                 </div>
                 <label strong class="col-sm-3 col-form-label"><strong>Numéro CIN : </strong></label> {{$etablissement->proprietaires->first()->cin}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Nom du propriétaire : </strong></label> {{$etablissement->proprietaires->first()->nom}}<br/>
-                <label strong class="col-sm-3 col-form-label"><strong>Adresse : </strong></label> {{$etablissement->proprietaires->first()->adresse}} <label class="col-sm-1 col-form-label"><strong> à   :</strong></label> {{$etablissement->proprietaires->first()->fokontany->fokotany}} <br/>
-                <label strong class="col-sm-3 col-form-label"><strong>Commune : </strong></label> {{$etablissement->proprietaires->first()->commune->commune}} <label class="col-sm-2 col-form-label"> <strong> District :</strong></label> {{$etablissement->proprietaires->first()->commune->district}} <br/>
-                <label strong class="col-sm-3 col-form-label"><strong>Région : </strong></label> {{$etablissement->proprietaires->first()->commune->region}}<br/>
+                <label strong class="col-sm-3 col-form-label"><strong>Adresse : </strong></label> {{$etablissement->proprietaires->first()->adresse}} <label class="col-sm-1 col-form-label"><strong> à   :</strong></label> {{$fokontany_prop->fokotany}} <br/>
+                <label strong class="col-sm-3 col-form-label"><strong>Commune : </strong></label> {{$etablissement->proprietaires->first()->commune->commune}} <label class="col-sm-2 col-form-label"> <strong> District :</strong></label> {{$district_prop->district}} <br/>
+                <label strong class="col-sm-3 col-form-label"><strong>Région : </strong></label> {{$region_prop->region}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Nationalité : </strong></label> {{$etablissement->proprietaires->first()->nationalite->nationalite}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Numéro téléphone : </strong></label> {{$etablissement->proprietaires->first()->num_tel}}<br/><br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Lien : </strong></label> {{$etablissement->proprietaires->first()->lien}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Identification Statistique : </strong></label> {{$etablissement->identification_stat}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Sigle : </strong></label> {{$etablissement->sigle}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Fond : </strong></label> {{$etablissement->fond * 1000}} Ariary<br/>
-                <label strong class="col-sm-3 col-form-label"><strong>Adresse Etablissement : </strong></label> {{$etablissement->adresse_etab}} <label class="col-sm-1 col-form-label"><strong> à   :</strong></label> {{$etablissement->fokontany->fokotany}} <br/>
-                <label strong class="col-sm-3 col-form-label"><strong>Commune : </strong></label> {{$etablissement->commune->commune}} <label class="col-sm-2 col-form-label"> <strong> District :</strong></label> {{$etablissement->commune->district}} <br/>
-                <label strong class="col-sm-3 col-form-label"><strong>Région : </strong></label> {{$etablissement->commune->region}}<br/>
+                <label strong class="col-sm-3 col-form-label"><strong>Adresse Etablissement : </strong></label> {{$etablissement->adresse_etab}} <label class="col-sm-1 col-form-label"><strong> à   :</strong></label> {{$fokontany_etab->fokotany}} <br/>
+                <label strong class="col-sm-3 col-form-label"><strong>Commune : </strong></label> {{$etablissement->commune->commune}} <label class="col-sm-2 col-form-label"> <strong> District :</strong></label> {{$district_etab->district}} <br/>
+                <label strong class="col-sm-3 col-form-label"><strong>Région : </strong></label> {{$region_etab->region}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Forme Juridique : </strong></label> {{$etablissement->juridique->description_code_juridique}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Téléphone Etablissement : </strong></label> {{$etablissement->tel_etab}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Type : </strong></label> {{$etablissement->type}}<br/>
-                <label strong class="col-sm-3 col-form-label"><strong>Activité Principal: </strong></label > {{$etablissement->activite->description}}<br/>
+                <label strong class="col-sm-3 col-form-label"><strong>Activité Principal: </strong></label > {{$etablissement->activite_princ}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Activité Secondaire1 : </strong></label> {{$etablissement->activite_sec1}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Activité Secondaire2 : </strong></label > {{$etablissement->activite_sec2}}<br/>
                 <label strong class="col-sm-3 col-form-label"><strong>Libelle Chef : </strong></label > {{$etablissement->lchef->description_lchef}}<br/>

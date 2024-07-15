@@ -13,4 +13,20 @@ class Fokontany extends Model
     {
         return $this->belongsTo(Commune::class);
     }
+
+    public static function getFokontanyProprietaire($id)
+    {
+        $etablissement = Etablissement::with('proprietaires')->find($id);
+        $proprietaire = $etablissement->proprietaires->first();
+        $fokontany = Fokontany::where('id', $proprietaire->fokontany_id)->first();
+        return ($fokontany);
+    }
+
+    public static function getFokontanyEtablissement($id)
+    {
+        $etablissement = Etablissement::with('proprietaires')->find($id);
+       
+        $fokontany = self::where('id', $etablissement->fokontany_id)->first();
+        return ($fokontany);
+    }
 }

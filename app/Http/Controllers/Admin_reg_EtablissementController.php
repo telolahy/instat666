@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Etablissement;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use Illuminate\Support\Facades\Validator;
 
 class Admin_reg_EtablissementController extends Controller
@@ -88,10 +89,23 @@ class Admin_reg_EtablissementController extends Controller
      */
     public function show($id)
     {
-        //dd('coucou');
+        
         $etablissement = Etablissement::with('proprietaires')->find($id);
-        // dd($etablissement);
-        return view('admin_reg.liste_etab.show')->with('etablissement', $etablissement);
+        $district_prop = District::getDistrictProprietaire($id);
+        $region_prop = Region::getRegionProprietaire($id);
+        $fokontany_prop = Fokontany::getFokontanyProprietaire($id);
+        $district_etab = District::getDistrictEtablissement($id);
+        $region_etab = Region::getRegionEtablissement($id);
+        $fokontany_etab = Fokontany::getFokontanyEtablissement($id);
+        // dd($fokontany_etab);
+        return view('admin_reg.liste_etab.show')
+                ->with('etablissement', $etablissement)
+                ->with('district_prop', $district_prop)
+                ->with('district_etab', $district_etab)
+                ->with('fokontany_etab', $fokontany_etab)
+                ->with('region_etab', $region_etab)
+                ->with('fokontany_prop', $fokontany_prop)
+                ->with('region_prop', $region_prop);
     }
 
     /**

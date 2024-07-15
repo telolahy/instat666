@@ -7,7 +7,7 @@ List Commune
 {{-- {{ Form::hidden('', $increment=1 ) }} --}}
 
 @section('contenu')
-
+ 
 <div class="col-sm-12">
   <div class="card tabs-card">
     <div class="card-block p-0">
