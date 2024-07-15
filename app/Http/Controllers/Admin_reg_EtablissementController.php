@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Lchef;
 use App\Models\Region;
 use App\Models\Commune;
+use App\Models\Section;
 use App\Models\Activite;
+use App\Models\District;
+use App\Models\Province;
 use App\Models\Fokontany;
 use App\Models\Juridique;
 use App\Models\Nationalite;
 use Illuminate\Http\Request;
 use App\Models\Etablissement;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\District;
 use Illuminate\Support\Facades\Validator;
 
 class Admin_reg_EtablissementController extends Controller
@@ -97,7 +100,7 @@ class Admin_reg_EtablissementController extends Controller
         $district_etab = District::getDistrictEtablissement($id);
         $region_etab = Region::getRegionEtablissement($id);
         $fokontany_etab = Fokontany::getFokontanyEtablissement($id);
-        // dd($fokontany_etab);
+        // dd($fokontany_etab); 
         return view('admin_reg.liste_etab.show')
                 ->with('etablissement', $etablissement)
                 ->with('district_prop', $district_prop)
@@ -116,34 +119,71 @@ class Admin_reg_EtablissementController extends Controller
      */
     public function edit($id)
     {
-        // dd('edit');
         $etablissement = Etablissement::with('proprietaires')->find($id);
-        // dd($etablissement);
-        $commune = Commune::find($id);
+
+        $province_prop = Province::getProvinceProprietaire($id);
+        $region_prop = Region::getRegionProprietaire($id);
+        $district_prop = District::getDistrictProprietaire($id);
+        $commune_prop = Commune::getCommuneProprietaire($id);
+        $nationalite_prop = Nationalite::getNationaliteProp($id);
+        $fokontany_prop = Fokontany::getFokontanyProprietaire($id);
+        // dd($nationalite_prop->nationalite);
         $nationalite = Nationalite::All();
-        $fokontany = Fokontany::All();
-        $fokontany_etab = Fokontany::All();
-        $activite_etab = Activite::All();
+        $provinces = Province::all();
+        $regions = Region::all();
+        $districts = District::all();
+        $communes = Commune::all();
+        $fokontanis = Fokontany::All();
+        $sections = Section::all();
+
+        $district_users = District::getDistrictsUser();
+        $region_user = Region::getRegionsUser();
         $lchefs = Lchef::All();
         $juridiques = Juridique::All();
+        $code_region = DB::table('regions')
+            ->select('code_region')
+            ->where('id', '=', Auth()->user()->region_id)->first();
 
-        
-            // $communes = DB::table('communes')
-            //     ->select('commune')
-            //     ->where('region', '=', Auth()->user()->region_user)->get();
-            $communes = Commune::groupBy('commune')
-                        ->get();
-            // dd($communes);
+      
 
+        $dernier_ligne = Etablissement::orderBy('created_at', 'DESC')->first();
+
+        $today = Carbon::now();
+        $today_year = $today->year;
+
+        if ($dernier_ligne != null) {
+            if ($today_year > $dernier_ligne->created_at->year) {
+
+                $num_sequenciel = "00000";
+            } else {
+
+                $num_sequenciel = str_pad($dernier_ligne->id, 5, "0", STR_PAD_LEFT);
+            }
+        } else {
+            $num_sequenciel = "00000";
+        }
+        $identification_stat = $code_region->code_region . "-" . $today_year . "-" . $num_sequenciel;
         return view('admin_reg.liste_etab.edit')
-            ->with('commune', $commune)
             ->with('nationalites', $nationalite)
-            ->with('fokontanys', $fokontany)
-            ->with('fokontany_etab', $fokontany_etab)
-            ->with('activites', $activite_etab)
-            ->with('lchefs', $lchefs)
+            ->with('fokontanis', $fokontanis)
+            ->with('regions', $regions)
+            ->with('districts', $districts)
+            ->with('district_users', $district_users)
             ->with('communes', $communes)
-            ->with('juridiques', $juridiques)->with('etablissement', $etablissement);
+            ->with('region_user', $region_user)
+            ->with('lchefs', $lchefs)
+            ->with('juridiques', $juridiques)
+            ->with('provinces', $provinces)
+            ->with('province_prop', $province_prop)
+            ->with('region_prop', $region_prop)
+            ->with('district_prop', $district_prop)
+            ->with('commune_prop', $commune_prop)
+            ->with('fokontany_prop', $fokontany_prop)
+            ->with('nationalite_prop', $nationalite_prop)
+            ->with('etablissement', $etablissement)
+            ->with('identification_stat', $identification_stat)
+            ->with('sections', $sections);
+        
     }
 
     /**

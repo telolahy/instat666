@@ -34,6 +34,7 @@ class Region extends Model
                         ->where('id',Auth()->user()->region_id)->first();
         return ($region_user);
     }
+    
     public static function getRegionProprietaire($id)
     {
         $etablissement = Etablissement::with('proprietaires')->find($id);
