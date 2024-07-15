@@ -68,10 +68,10 @@ class Admin_reg_AjoutController extends Controller
         $code_region = DB::table('regions')
             ->select('code_region')
             ->where('id', '=', Auth()->user()->region_id)->first();
-        
-        // // dd($code_region);   
-        
-        
+
+        // // dd($code_region);
+
+
         $dernier_ligne = Etablissement::orderBy('created_at', 'DESC')->first();
 
         $today = Carbon::now();
@@ -100,8 +100,8 @@ class Admin_reg_AjoutController extends Controller
             ->with('district_users', $district_users)
             ->with('communes', $communes)
             ->with('region_user', $region_user)
-            // ->with('fokontany_etab', $fokontany_etab) 
-            // ->with('activites', $activite_etab) 
+            // ->with('fokontany_etab', $fokontany_etab)
+            // ->with('activites', $activite_etab)
             ->with('lchefs', $lchefs)
             // ->with('communes', $communes)
             ->with('juridiques', $juridiques)
@@ -119,16 +119,24 @@ class Admin_reg_AjoutController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nom' => 'required',
+            //proprietaire validation
             'cin' => 'required',
-            'commune_id' => 'required',
-            'fokontany_id' => 'required',
             'nationalite_id' => 'required',
+            'nom' => 'required',
             'adresse' => 'required',
-            'lien' => 'required',
+            'province'=>'required',
+            'region'=>'required',
+            'district'=>'required',
+            'commune' => 'required',
+            'fokontany' => 'required',
             'num_tel' => 'required',
+            'lien' => 'required',
+            //proprietaire validation
             'sigle' => 'required',
             'adresse_etab' => 'required',
+            'district_etab' => 'required',
+            'commune_etab' => 'required',
+            'fokontany_etab' => 'required',
             'fond' => 'required',
             'tel_etab' => 'required',
             'num_patente' => 'required',
@@ -142,17 +150,19 @@ class Admin_reg_AjoutController extends Controller
        if ($validator->fails()) {
            return redirect()->back()->withErrors($validator)->withInput();
        }
-         
+
            $etablissement = new Etablissement();
-           
+
            $etablissement->user_id = Auth::user()->id;
            $etablissement->identification_stat = $request->input('identification_stat');
            $etablissement->sigle = $request->input('sigle');
            $etablissement->adresse_etab = $request->input('adresse_etab');
-           $etablissement->fokontany_id = $request->input('fokotany_id');
+           $etablissement->region_id = $request->input('region_etab');
+           $etablissement->district_id = $request->input('district_etab');
+           $etablissement->commune_id = $request->input('commune_etab');
+           $etablissement->fokontany_id = $request->input('fokontany_etab');
            $etablissement->lchef_id = $request->input('lchef_id');
            $etablissement->juridique_id = $request->input('juridique_id');
-           $etablissement->commune_id = $request->input('commune_id');
            $etablissement->fond = $request->input('fond');
            $etablissement->tel_etab = $request->input('tel_etab');
            $etablissement->num_patente = $request->input('num_patente');
@@ -160,35 +170,53 @@ class Admin_reg_AjoutController extends Controller
            $etablissement->comptabilite = $request->input('comptabilite');
            $etablissement->duplicata = $request->input('duplicata');
            $etablissement->type = $request->input('type');
-           $etablissement->activite_id = $request->input('activite_id');
-           $etablissement->activite_sec1 = $request->input('activite_sec1');
-           $etablissement->activite_sec2 = $request->input('activite_sec2');
+           $etablissement->activite_princ = $request->input('activite_0');
+           $etablissement->section_id = $request->input('section_0');
+           $etablissement->division_id = $request->input('division_0');
+           $etablissement->groupe_id = $request->input('groupe_0');
+           $etablissement->classe_id = $request->input('classe_0');
+           $etablissement->categorie_id = $request->input('categorie_0');
+           $etablissement->activite_sec1 = $request->input('activite_1');
+           $etablissement->section_sec1 = $request->input('section_1');
+           $etablissement->division_sec1 = $request->input('division_1');
+           $etablissement->groupe_sec1 = $request->input('groupe_1');
+           $etablissement->classe_sec1 = $request->input('classe_1');
+           $etablissement->categorie_sec1 = $request->input('categorie_1');
+           $etablissement->activite_sec2 = $request->input('activite_2');
+           $etablissement->section_sec2 = $request->input('section_2');
+           $etablissement->division_sec2 = $request->input('division_2');
+           $etablissement->groupe_sec2 = $request->input('groupe_2');
+           $etablissement->classe_sec2 = $request->input('classe_2');
+           $etablissement->categorie_sec2 = $request->input('categorie_2');
            $etablissement->malagasy_m = $request->input('malagasy_m');
            $etablissement->malagasy_f = $request->input('malagasy_f');
            $etablissement->etranger_m = $request->input('etranger_m');
            $etablissement->etranger_f = $request->input('etranger_f');
            $etablissement->status = "En attente";
-           $etablissement->num_entreprise =$etablissement->activite_id."-".$etablissement->identification_stat;
-           
+           $etablissement->num_entreprise =$etablissement->categorie_id."-".$etablissement->identification_stat;
+
            $etablissement->save();
            $proprietaire = new Proprietaire();
+           $proprietaire->province_id = $request->input('province');
+           $proprietaire->region_id = $request->input('region');
+           $proprietaire->district_id = $request->input('district');
+           $proprietaire->commune_id = $request->input('commune');
            $proprietaire->cin = $request->input('cin');
            $proprietaire->nom = $request->input('nom');
            $proprietaire->nationalite_id = $request->input('nationalite_id');
-           $proprietaire->commune_id = $request->input('commune_id');
            $proprietaire->adresse = $request->input('adresse');
-           $proprietaire->fokontany_id = $request->input('fokontany_id');
+           $proprietaire->fokontany_id = $request->input('fokontany');
            $proprietaire->num_tel = $request->input('num_tel');
            $proprietaire->lien = $request->input('lien');
-           $proprietaire->email = $request->input('email');  
-           $proprietaire->save(); 
-        
-        
-        
-        
+           $proprietaire->email = $request->input('email');
+           $proprietaire->save();
+
+
+
+
         $etablissement->proprietaires()->attach($proprietaire->id);
-        
-           
+
+
         return redirect()->route('reg_etab.index')->with('message', 'Données envoyées avec succès !!!');
     }
 

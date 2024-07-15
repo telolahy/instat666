@@ -29,10 +29,10 @@
                                 <div class="col">
                                     <label class="">Province : <span style="color: red">*</span></label>
                                     <select class="form-control province" name="province" id="province">
-                                         <option value="">Sélectionnez une province</option> 
+                                         <option value="">Sélectionnez une province</option>
                                          @foreach ($provinces as $province)
                                             <option value="{{$province->id}}">{{$province->nom_province}}</option>
-                                        @endforeach 
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
@@ -50,9 +50,12 @@
                                     <select class="form-control" name="commune" id="commune">
                                     </select>
                                 </div>
-                               
-                            </div>  
-                                
+
+                            </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
+
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">CIN : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
@@ -87,10 +90,10 @@
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Fokontany : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
-                                        <select class="form-control" required name="fokontany_id" id="fokontany"  >
+                                        <select class="form-control" required name="fokontany" id="fokontany"  >
                                         </select>
                                   </div>
-                              </div>  
+                              </div>
                               <div class="form-group row">
                                     <div class="col">
                                         <label class="">Numéro Tel : <span style="color: red">*</span></label>
@@ -153,8 +156,8 @@
                                     <select class="form-control" name="fokontany_etab" id="fokontany_etab">
                                     </select>
                                 </div>
-                               
-                            </div>  
+
+                            </div>
                             <div class="form-group row">
                                 <label class="">  </label>
                                 <label class="col-sm-2 col-form-label">Fond (en 1000 Ar): <span style="color: red">*</span></label>
@@ -188,14 +191,14 @@
                                 </div>
                                 <div class="col">
                                     <label class="">Comptabilité : <span style="color: red">*</span></label>
-                                    <select class="form-control" required name="comptabilite" id="comptabilite"  >       
+                                    <select class="form-control" required name="comptabilite" id="comptabilite"  >
                                             <option value="Oui" {{ old('comptabilite') == 'Oui' ? 'selected' : '' }}>Oui</option>
                                             <option value="Non" {{ old('comptabilite') == 'Non' ? 'selected' : '' }}>Non</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="">Duplicata : <span style="color: red">*</span></label>
-                                    <select class="form-control" required name="duplicata" id="duplicata"  >       
+                                    <select class="form-control" required name="duplicata" id="duplicata"  >
                                             <option value="0" {{ old('duplicata') == '0' ? 'selected' : '' }}>0</option>
                                             <option value="1" {{ old('duplicata') == '1' ? 'selected' : '' }}>1</option>
                                             <option value="2" {{ old('duplicata') == '2' ? 'selected' : '' }}>2</option>
@@ -205,7 +208,7 @@
                                 </div>
                                 <div class="col">
                                     <label class="">Type : <span style="color: red">*</span></label>
-                                    <select class="form-control" required name="type" id="type"  >       
+                                    <select class="form-control" required name="type" id="type"  >
                                             <option value="C"  {{ old('type') == 'C' ? 'selected' : '' }}>Création</option>
                                             <option value="M"  {{ old('type') == 'M' ? 'selected' : '' }}>Modification</option>
                                             <option value="A"  {{ old('type') == 'A' ? 'selected' : '' }}>Abandon</option>
@@ -222,14 +225,14 @@
                                         <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité Principal " name="activite_0" id="activite_0">
                                     </div>
                                   </div>
-                            </div> 
+                            </div>
                             <div class="form-group row">
                                 <div class="col">
                                     <label class="">Section:</label>
                                     <select class="form-control"  name="section_0" id="section_0">
                                         <option value="">Sélectionner une section</option>
                                         @foreach ($sections as $section)
-                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option> 
+                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -253,8 +256,10 @@
                                     <select class="form-control" name="categorie_0" id="categorie_0">
                                     </select>
                                 </div>
-                               
-                            </div>  
+                            </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
                             <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Activité Secondaire1 :</label>
                                   <div class="col-sm-10">
@@ -269,7 +274,7 @@
                                     <select class="form-control"  name="section_1" id="section_1">
                                         <option value="">Sélectionner une section</option>
                                         @foreach ($sections as $section)
-                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option> 
+                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -293,9 +298,12 @@
                                     <select class="form-control" name="categorie_1" id="categorie_1">
                                     </select>
                                 </div>
-                               
-                               
-                            </div>  
+
+
+                            </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
                             <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Activité Secondaire2 :</label>
                                   <div class="col-sm-10">
@@ -310,14 +318,13 @@
                                     <select class="form-control"  name="section_2" id="section_2">
                                         <option value="">Sélectionner une section</option>
                                         @foreach ($sections as $section)
-                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option> 
+                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label class="">Division :</label>
                                     <select class="form-control" name="division_2" id="division_2">
-                                        {{-- <option value="{{}}">{{}}</option> --}}
                                     </select>
                                 </div>
                                 <div class="col">
@@ -335,8 +342,11 @@
                                     <select class="form-control" name="categorie_2" id="categorie_2">
                                     </select>
                                 </div>
-                               
-                            </div>  
+
+                            </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
                             <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Libelle Chef : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
@@ -395,15 +405,15 @@
                                   </div>
                               </div>
                         </form>
-                          
-                       </div> 
+
+                       </div>
                     </div>
                 </div>
             </div>
-             
-   
+
+
 @endsection
 
 @section('script')
-      
+
 @endsection
