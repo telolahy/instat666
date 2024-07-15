@@ -22,7 +22,7 @@ class Quitance_regController extends Controller
 
         $etablissement = Etablissement::with('proprietaires')->find($id);
 
-        $activite_desc= $etablissement->get_first_25_words($etablissement->activite->description);
+        $activite_desc= $etablissement->get_first_25_words($etablissement->activite_princ);
         $activite_desc1= $etablissement->get_first_25_words($etablissement->activite_sec1);
         $activite_desc2= $etablissement->get_first_15_words($etablissement->activite_sec2);
 
@@ -37,14 +37,15 @@ class Quitance_regController extends Controller
         
         ini_set('max_execution_time', 600);
         $tab = explode("-", $etablissement->identification_stat);
-        $activite = $etablissement->activite->categorie;    
+        $categorie = Etablissement::getCategorieEtab($id);
+
         $lien = $etablissement->proprietaires->first()->lien;
         $date_now = Carbon::now()->isoFormat('DD/MM/YYYY');
         $region = $tab[0];
         $annee = $tab[1];
         $code = $tab[2];
         PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
-        $pdf = PDF::loadView('pdf.pdf_carte_statistique', compact('etablissement', 'activite', 'region', 'annee', 'code', 'lien', 'date_now','qrcodeBase64','activite_desc','activite_desc1','activite_desc2'));
+        $pdf = PDF::loadView('pdf.pdf_carte_statistique', compact('etablissement', 'categorie', 'region', 'annee', 'code', 'lien', 'date_now','qrcodeBase64','activite_desc','activite_desc1','activite_desc2'));
 
         return $pdf->download('carte' . '_' . $etablissement->proprietaires->first()->nom . '.pdf');
     }

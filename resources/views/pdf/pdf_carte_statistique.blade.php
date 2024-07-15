@@ -301,7 +301,7 @@
                     <p class="karatra"> KARATRA STATISTIKA</p>
                     <img class="carte" src="{{public_path('assets/img/carte.jpg')}}" style="width: 98%; height: 15%">
                     <p class="laharana">Laharana statistika ( Numéro d'Identification) :</p>
-                    <div class="activite"><p class="value">{{$activite}}</p></div>
+                    <div class="activite"><p class="value">{{$categorie->code_categorie}}</p></div>
                     <div class="region"><p class="value">{{$region}}</p></div>
                     <div class="annee"><p class="value">{{$annee}}</p></div>
                     <div class="lien"><p class="value">{{$lien}}</p></div>

@@ -76,5 +76,14 @@ class Etablissement extends Model
         $result .= '...';
 
         return $result;
+
+        
+    }
+
+    public static function getCategorieEtab($id)
+    {
+        $etablissement = Etablissement::with('proprietaires')->find($id);
+        $categorie = Categorie::where('id', $etablissement->categorie_id)->first();
+        return ($categorie);
     }
 }

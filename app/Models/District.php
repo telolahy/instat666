@@ -27,4 +27,20 @@ class District extends Model
 
         return($districts_user);
     }
+
+    public static function getDistrictProprietaire($id)
+    {
+        $etablissement = Etablissement::with('proprietaires')->find($id);
+        $proprietaire = $etablissement->proprietaires->first();
+        $district = District::where('id', $proprietaire->district_id)->first();
+        return ($district);
+    }
+
+    public static function getDistrictEtablissement($id)
+    {
+        $etablissement = Etablissement::with('proprietaires')->find($id);
+       
+        $district = District::where('id', $etablissement->district_id)->first();
+        return ($district);
+    }
 }
