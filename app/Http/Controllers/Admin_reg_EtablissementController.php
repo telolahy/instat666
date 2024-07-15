@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lchef;
+use App\Models\Region;
 use App\Models\Commune;
 use App\Models\Activite;
 use App\Models\Fokontany;
@@ -36,7 +37,7 @@ class Admin_reg_EtablissementController extends Controller
         return view('admin_reg.liste_etab.search_index')->with('etablissements', $etablissements);
     }
 
-
+ 
     /**
      * Display a listing of the resource.
      *
@@ -44,12 +45,17 @@ class Admin_reg_EtablissementController extends Controller
      */
     public function index()
     {
+        // $etablissements = Etablissement::with('proprietaires')
+        //     ->join('communes', 'etablissements.commune_id', '=', 'communes.id')
+        //     ->join('users', 'users.region_user', '=', 'communes.region')
+        //     ->select('etablissements.*', 'communes.commune as nom_commune', 'users.region_user', 'communes.id as id_commune')
+        //     ->distinct()
+        //     ->paginate(8);
+
+        $region_user =Region::getRegionsUser();
+        
         $etablissements = Etablissement::with('proprietaires')
-            ->join('communes', 'etablissements.commune_id', '=', 'communes.id')
-            ->join('users', 'users.region_user', '=', 'communes.region')
-            ->select('etablissements.*', 'communes.commune as nom_commune', 'users.region_user', 'communes.id as id_commune')
-            ->distinct()
-            ->paginate(8);
+                        ->where('region_id', $region_user->id)->paginate(8);
         return view('admin_reg.liste_etab.index')->with('etablissements', $etablissements);
     }
 
