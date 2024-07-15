@@ -20,6 +20,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Section;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Categorie;
 
 class Admin_reg_AjoutController extends Controller
 {
@@ -152,11 +153,17 @@ class Admin_reg_AjoutController extends Controller
        }
 
            $etablissement = new Etablissement();
-
+            $categorie = Categorie::findOrFail($request->input('categorie_0'));
+            $province_etab = Region::findOrFail($request->input('region_etab'));
+            
+           
            $etablissement->user_id = Auth::user()->id;
            $etablissement->identification_stat = $request->input('identification_stat');
            $etablissement->sigle = $request->input('sigle');
            $etablissement->adresse_etab = $request->input('adresse_etab');
+
+           $etablissement->province_id = $province_etab->province_id;
+
            $etablissement->region_id = $request->input('region_etab');
            $etablissement->district_id = $request->input('district_etab');
            $etablissement->commune_id = $request->input('commune_etab');
@@ -193,7 +200,9 @@ class Admin_reg_AjoutController extends Controller
            $etablissement->etranger_m = $request->input('etranger_m');
            $etablissement->etranger_f = $request->input('etranger_f');
            $etablissement->status = "En attente";
-           $etablissement->num_entreprise =$etablissement->categorie_id."-".$etablissement->identification_stat;
+
+
+           $etablissement->num_entreprise =$categorie->code_categorie."-".$etablissement->identification_stat;
 
            $etablissement->save();
            $proprietaire = new Proprietaire();
