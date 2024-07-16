@@ -113,7 +113,6 @@ class AjoutAdminRegExistantController extends Controller
         $identification_stat = $code_region->code_region . "-" . $today_year . "-" . $num_sequenciel;
 
         return view('admin_reg.ajout_existant.edit')
-            // ->with('commune', $commune)
             ->with('proprietaire', $proprietaire)
             ->with('nationalites', $nationalite)
             ->with('fokontanis', $fokontanis)
@@ -123,10 +122,7 @@ class AjoutAdminRegExistantController extends Controller
             ->with('district_users', $district_users)
             ->with('communes', $communes)
             ->with('region_user', $region_user)
-            // ->with('fokontany_etab', $fokontany_etab)
-            // ->with('activites', $activite_etab)
             ->with('lchefs', $lchefs)
-            // ->with('communes', $communes)
             ->with('juridiques', $juridiques)
             ->with('provinces', $provinces)
             ->with('identification_stat', $identification_stat)
