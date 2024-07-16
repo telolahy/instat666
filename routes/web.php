@@ -192,7 +192,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('reg_ajout', Admin_reg_AjoutController::class);
     Route::get('/search_commune_reg', [Admin_reg_AjoutController::class, 'ft_search'])->name('search_commune_reg');
     Route::get('/ajout_admin_reg_ft/', [Admin_reg_AjoutController::class, 'ajout'])->name('ajout_admin_reg_ft');
-    Route::resource('add_reg_existant',AjoutAdminRegExistantController::class);
+    Route::resource('add_reg_existant',AjoutAdminRegExistantController::class); 
     //liste en cascade
     //province region
     Route::get('/regions/{province_id}', [DropdownController::class, 'getRegions']);
