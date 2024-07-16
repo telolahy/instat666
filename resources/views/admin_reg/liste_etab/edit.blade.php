@@ -12,62 +12,106 @@
                       <div class="tab-content card-block">
                       <div class="header" style="padding-bottom: 3%">
                           <h4 class="title" style="text-align: center">A propos du Propriétaire :</h4><hr/>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                       </div>
-                            <form action="{{route('reg_etab.update',$etablissement->id)}}" method="POST" >
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" class="form-control form-control-bold form-control-center" name="id_etab" id="id_etab" value="{{$etablissement->id}}">
-                                    <input type="hidden" class="form-control form-control-bold form-control-center" name="id_proprietaire" id="id_proprietaire" value="{{$etablissement->proprietaires->first()->id}}" >
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">CIN : <span style="color: red">*</span></label>
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "12" name="cin"  id="cin" value="{{$etablissement->proprietaires->first()->cin}}" readonly/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Nom Complet : <span style="color: red">*</span></label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->proprietaires->first()->nom}}" name="nom" id="nom">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Nationalité : <span style="color: red">*</span></label>
-                                        <div class="col-sm-10">
-                                                <select class="form-control" required name="nationalite_id" id="nationalite_proprietaire" value="{{$etablissement->proprietaires->first()->nationalite->nationalite}}" >
-                                                    @foreach ($nationalites as $nationalite)
-                                                    <option value="{{ $nationalite->id }}">
-                                                        {{ $nationalite->nationalite }}
-                                                    </option>
-                                                    @endforeach
+                        <form action="{{route('reg_etab.update',$etablissement->id)}}" method="POST" >
+                           @csrf
+                           @method('PUT')
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label class="">Province : <span style="color: red">*</span></label>
+                                    <select class="form-control province" name="province" id="province">
+                                        <option value="{{$province_prop->id}}" selected>{{$province_prop->nom_province}}</option>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{$province->id}}">{{$province->nom_province}}</option>
+                                        @endforeach 
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="">Région : <span style="color: red">*</span></label>
+                                    <select class="form-control region" name="region" id="region">
+                                    <option value="{{$region_prop->id}}" selected>{{$region_prop->region}}</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">District :</label>
+                                    <select class="form-control" name="district" id="district">
+                                    <option value="{{$district_prop->id}}" selected>{{$district_prop->district}}</option>
+
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Commune :</label>
+                                    <select class="form-control" name="commune" id="commune">
+                                    <option value="{{$commune_prop->id}}" selected>{{$commune_prop->commune}}</option>
+
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
+
+                              <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">CIN : <span style="color: red">*</span></label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "12" name="cin"  id="cin" value="{{$etablissement->proprietaires->first()->cin}}"/>
+
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Nom Complet : <span style="color: red">*</span></label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->proprietaires->first()->nom}}" name="nom" id="nom">
+                                      {{-- <input type="text" class="form-control form-control-bold form-control-center" placeholder="Nom complet " name="nom" value="{{ old('nom') }}" id="nom"> --}}
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Nationalité : <span style="color: red">*</span></label>
+                                  <div class="col-sm-10">
+                                        <select class="form-control" required name="nationalite_id" id="nationalite_proprietaire"  >
+                                            <option value="{{$nationalite_prop->id}}" selected>{{$nationalite_prop->nationalite}}</option>
+                                            
+                                           @foreach ($nationalites as $nationalite)
+                                            <option value="{{ $nationalite->id }}" {{ old('nationalite_id') == $nationalite->id ? 'selected' : '' }}>
+                                                {{ $nationalite->nationalite }}
+                                            </option>
+                                            @endforeach
                                         </select><br/>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="adresse" id="adresse" value="{{$etablissement->proprietaires->first()->adresse}}">
+                                    <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="adresse" id="adresse" value="{{$etablissement->proprietaires->first()->adresse}}">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Fokontany : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
-                                        <select class="form-control" required name="fonkotany_id" id="fokotany_proprietaire"  >
-                                            @foreach ($fokontanys as $fokotany)
-                                            <option value="{{$fokotany->id}}">
-                                                {{ $fokotany->fokotany }}
-                                            </option>
-                                            @endforeach
+                                    
+                                        <select class="form-control" required name="fokontany" id="fokontany"  >
+                                        <option value="{{$fokontany_prop->id}}" selected>{{$fokontany_prop->fokotany}}</option>
                                         </select>
                                   </div>
-                              </div>  
+                              </div>
                               <div class="form-group row">
                                     <div class="col">
                                         <label class="">Numéro Tel : <span style="color: red">*</span></label>
-                                        <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10" name="num_tel"  id="num_tel" placeholder="Numero téléphone" value="{{$etablissement->proprietaires->first()->num_tel}}"/>
+                                        <input type="text" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10" name="num_tel"  id="num_tel" placeholder="Numero téléphone" value="{{$etablissement->proprietaires->first()->num_tel}}"/>
                                     </div>
                                     <div class="col-sm-4">
                                         <label class="">Lien : <span style="color: red">*</span></label>
-                                        <input type="number" class="form-control form-control-bold form-control-center" placeholder="lien" name="lien" id="lien" value="0" readonly>
+                                        <input type="text" class="form-control form-control-bold form-control-center" placeholder="lien" name="lien" id="lien" value="0" readonly>
                                     </div>
                                     <div class="col">
                                         <label class="">Email (facultatif) :</label>
@@ -76,13 +120,13 @@
                                 </div>
                               <br/><hr/>
                               <div class="header" style="padding-bottom: 3%">
-                                    <h4 class="title" style="text-align: center">A propos de l'Etablissement :</h4><hr/>
+                                    <h4 class="title" style="text-align: center">A propos de l'Etablissement</h4><hr/>
                               </div>
-                              <input type="hidden" class="form-control form-control-bold form-control-center" name="num_entreprise" id="num_entreprise">
+                              <input type="hidden" class="form-control form-control-bold form-control-center" name="num_entreprise"  id="num_entreprise">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Identification :</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->identification_stat}}" name="identification_stat" id="identification_stat" readonly>
+                                     <input type="text" class="form-control form-control-bold form-control-center" value="{{$identification_stat}}" name="identification_stat" id="identification_stat" readonly> 
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -98,17 +142,35 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Fokontany : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="fokotany_etab" id="fokotany_etab" value="{{$etablissement->fokontany->adresse_etab}}" >
-                                            @foreach ($fokontany_etab as $fokotany)
-                                            <option value="{{ $fokotany->id }}">
-                                                {{ $fokotany->fokotany }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                  </div>
-                            </div> 
+                                <div class="col-sm-4">
+                                    <label class="">Région :</label>
+                                    <select class="form-control" readonly name="region_etab" id="region_etab">
+                                        <option value="{{$region_etab->id}}" selected>{{$region_etab->region}}</option>
+                                         {{-- <option value="{{$region_user->id}}">{{$region_user->region}}</option>  --}}
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">District :</label>
+                                    <select class="form-control" name="district_etab" id="district_etab">
+                                        <option value="{{$district_etab->id}}" selected>{{$district_etab->district}}</option>
+                                         @foreach ($district_users as $district_user)
+                                        <option value="{{$district_user->id}}">{{$district_user->district}}</option>
+                                        @endforeach 
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Commune :</label>
+                                    <select class="form-control" name="commune_etab" id="commune_etab">
+                                        <option value="{{$commune_etab->id}}" selected>{{$commune_etab->commune}}</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">fokontany :</label>
+                                    <select class="form-control" name="fokontany_etab" id="fokontany_etab">
+                                        <option value="{{$fokontany_etab->id}}" selected>{{$fokontany_etab->fokotany}}</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="">  </label>
                                 <label class="col-sm-2 col-form-label">Fond (en 1000 Ar): <span style="color: red">*</span></label>
@@ -163,122 +225,220 @@
                             <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Activité Principal : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
-                                        <select class="form-control" required name="activite_id" id="activite_etab" value="{{$etablissement->activite->description}}" >
-                                            @foreach ($activites as $activite)
-                                            <option value="{{ $activite->id }}">
-                                                {{ $activite->description }}
-                                            </option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->activite_princ}}" placeholder="Activité Principal " name="activite_0" id="activite_0">
+                                    </div>
                                   </div>
-                            </div> 
+                            </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label class="">Section:</label>
+                                    <select class="form-control"  name="section_0" id="section_0">
+                                       <option value="{{$section_etab->id}}" selected>{{$section_etab->type_section}}</option>
+                                        @foreach ($sections as $section)
+                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
+                                        @endforeach 
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Division :</label>
+                                    <select class="form-control" name="division_0" id="division_0">
+                                        <option value="{{$division_etab->id}}" selected>{{$division_etab->type_division}}</option>
+                                    
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Groupe :</label>
+                                    <select class="form-control" name="groupe_0" id="groupe_0">
+                                       <option value="{{$groupe_etab->id}}" selected>{{$groupe_etab->type_groupe}}</option>
+
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Classe :</label>
+                                    <select class="form-control" name="classe_0" id="classe_0">
+                                       <option value="{{$classe_etab->id}}" selected>{{$classe_etab->type_classe}}</option>
+
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Categorie :</label>
+                                    <select class="form-control" name="categorie_0" id="categorie_0">
+                                       <option value="{{$categorie_etab->id}}" selected>{{$categorie_etab->type_categorie}}</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
                             <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Activité Secondaire1 :</label>
                                   <div class="col-sm-10">
-                                        <select class="form-control" required name="activite_sec1" id="activite_sec1" value="{{$etablissement->activite_sec1}}"  >
-                                            @foreach ($activites as $activite)
-                                            <option value="{{ $activite->description }}">
-                                                {{ $activite->description }}
-                                            </option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->activite_sec1}}" placeholder="Activité secondaire1 " name="activite_1" id="activite_1">
+                                    </div>
                                   </div>
                             </div>
                             <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Activité Secondaire2:</label>
-                                  <div class="col-sm-10">
-                                    {{-- {{ Form::select('activite_sec2', $activites->description, $etablissement->activite_sec1 , ['class' => 'form-control','id' => 'activite_sec2']) }} --}}
-                                        <select class="form-control" required name="activite_sec2" id="activite_sec2" value="{{$etablissement->activite_sec1}}" >
-                                            @foreach ($activites as $activite)
-                                            <option value="{{ $activite->description }}">
-                                                {{ $activite->description }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                  </div>
-                            </div>
-                            <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Libelle Chef : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="lchef_id" id="lchef_etab" value="{{$etablissement->lchef->description_lchef}}"  >
-                                            @foreach ($lchefs as $lchef)
-                                            <option value="{{ $lchef->id }}">
-                                                {{ $lchef->description_lchef }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                  </div>
-                            </div>
-                            <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Forme Juridique : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="juridique_id" id="juridique_etab" value="{{$etablissement->juridique->description_code_juridique}}" >
-                                            @foreach ($juridiques as $juridique)
-                                            <option value="{{ $juridique->id }}">
-                                                {{ $juridique->description_code_juridique  }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                  </div>
-                            </div>
-                            <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Commune : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="commune_id" id="commune_etab"  value="{{$etablissement->commune->commune}}">
-                                            @foreach ($communes as $c)
-                                            <option value="{{ $c->id }}">
-                                                {{ $c->commune  }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                  </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-2">
-                                    <label class=""></label>
-                                    <label class="">Salariés Malagasy :</label>
+                                <div class="col">
+                                    <label class="">Section:</label>
+                                    <select class="form-control"  name="section_1" id="section_1">
+                                        <option value="{{$section_sec1->id}}" selected>{{$section_sec1->type_section}}</option>
+                                         @foreach ($sections as $section)
+                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
+                                        @endforeach 
+                                    </select>
                                 </div>
                                 <div class="col">
-                                    <label class=""></label>
-                                    <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" name="malagasy_m"  id="malagasy_m" placeholder="Masculin" value="{{$etablissement->malagasy_m}}"/>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label class=""></label>
-                                    <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" name="malagasy_f"  id="malagasy_f" placeholder="Feminin" value="{{$etablissement->malagasy_f}}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-2">
-                                    <label class="">Salariés Etrangers :</label>
+                                    <label class="">Division :</label>
+                                    <select class="form-control" name="division_1" id="division_1">
+                                        <option value="{{$division_sec1->id}}" selected>{{$division_sec1->type_division}}</option>
+                                    
+                                    </select>
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" name="etranger_m"  id="etranger_m" placeholder="Masculin" value="{{$etablissement->etranger_m}}" />
+                                    <label class="">Groupe :</label>
+                                    <select class="form-control" name="groupe_1" id="groupe_1">
+                                       <option value="{{$groupe_sec1->id}}" selected>{{$groupe_sec1->type_groupe}}</option>
+
+                                    </select>
                                 </div>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" name="etranger_f"  id="etranger_f" placeholder="Feminin" value="{{$etablissement->etranger_f}}" />
+                                <div class="col">
+                                    <label class="">Classe :</label>
+                                    <select class="form-control" name="classe_1" id="classe_1">
+                                       <option value="{{$classe_sec1->id}}" selected>{{$classe_sec1->type_classe}}</option>
+
+                                    </select>
                                 </div>
+                                <div class="col">
+                                    <label class="">Categorie :</label>
+                                    <select class="form-control" name="categorie_1" id="categorie_1">
+                                       <option value="{{$categorie_sec1->id}}" selected>{{$categorie_sec1->type_categorie}}</option>
+
+                                    </select>
+                                </div>
+
+
                             </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
+                            <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Activité Secondaire2 :</label>
+                                  <div class="col-sm-10">
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->activite_sec2}}" placeholder="Activité secondaire2" name="activite_2"  id="activite_2">
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label class="">Section:</label>
+                                    <select class="form-control"  name="section_2" id="section_2">
+                                        <option value="{{$section_sec2->id}}" selected>{{$section_sec2->type_section}}</option>
+                                         @foreach ($sections as $section)
+                                            <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
+                                        @endforeach 
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Division :</label>
+                                    <select class="form-control" name="division_2" id="division_2">
+                                        <option value="{{$division_sec2->id}}" selected>{{$division_sec2->type_division}}</option>
+                                    
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Groupe :</label>
+                                    <select class="form-control" name="groupe_2" id="groupe_2">
+                                       <option value="{{$groupe_sec2->id}}" selected>{{$groupe_sec2->type_groupe}}</option>
+
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Classe :</label>
+                                    <select class="form-control" name="classe_2" id="classe_2">
+                                       <option value="{{$classe_sec2->id}}" selected>{{$classe_sec2->type_classe}}</option>
+
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Categorie :</label>
+                                    <select class="form-control" name="categorie_2" id="categorie_2">
+                                       <option value="{{$categorie_sec2->id}}" selected>{{$categorie_sec2->type_categorie}}</option>
+
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Libelle Chef : <span style="color: red">*</span></label>
+                                <div class="col-sm-10">
+                                      <select class="form-control" required name="lchef_id" id="lchef_etab">
+                                        <option value="{{$etablissement->lchef->id}}" selected>{{$etablissement->lchef->description_lchef}}</option>
+                                          @foreach ($lchefs as $lchef)
+                                            <option value="{{ $lchef->id }}"> {{$lchef->description_lchef}} </option>
+                                          @endforeach
+                                      </select>
+                                </div>
+                          </div>
+                          <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Forme Juridique : <span style="color: red">*</span></label>
+                                <div class="col-sm-10">
+                                      <select class="form-control" required name="juridique_id" id="juridique_etab">
+                                        <option value="{{$etablissement->juridique->id}}" selected> {{$etablissement->juridique->description_code_juridique}} </option>
+                                          @foreach ($juridiques as $juridique)
+                                            <option value="{{$juridique->id }}"> {{$juridique->description_code_juridique}} </option>
+                                          @endforeach
+                                      </select>
+                                </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-2">
+                                <label class=""></label>
+                                <label class="">Salariés Malagasy :</label>
+                            </div>
+                            <div class="col">
+                                <label class=""></label>
+                                <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" name="malagasy_m"  id="malagasy_m" placeholder="Masculin" value="{{$etablissement->malagasy_m}}"/>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class=""></label>
+                                <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" name="malagasy_f"  id="malagasy_f" placeholder="Feminin" value="{{$etablissement->malagasy_f}}" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">
+                                <label class="">Salariés Etrangers :</label>
+                            </div>
+                            <div class="col">
+                                <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" name="etranger_m"  id="etranger_m" placeholder="Masculin" value="{{$etablissement->etranger_m}}" />
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" name="etranger_f"  id="etranger_f" placeholder="Feminin" value="{{$etablissement->etranger_f}}" />
+                            </div>
+                        </div>
 
                                 <br/>
-                              <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label"></label>
-                                  <div class="col-sm-10" >
-                                      {{-- {{Form::submit('Enregistrer', ['class' => 'btn btn-outline-primary', 'id' => 'rectifier_proprietaire','style' => 'display: inline'])}}  --}}
-                                      <button class="btn btn-outline-primary" type="submit" >Enregistrer</button>
-                                      <a onclick="window.location='{{route('reg_etab.show',$etablissement->id)}}'" class="btn btn-inverse btn-outline-inverse" style="display: inline;margin-left: 60%"><i class="icofont icofont-info-square"></i> Retour </a>
-                                  </div>
-                              </div>
-                         </form>
-                          
-                       </div> 
+                                <div class="col-sm-10" >
+                                    {{-- {{Form::submit('Enregistrer', ['class' => 'btn btn-outline-primary', 'id' => 'rectifier_proprietaire','style' => 'display: inline'])}}  --}}
+                                    <button class="btn btn-outline-primary" type="submit" >Enregistrer</button>
+                                    <!-- <a onclick="window.location='{{route('reg_etab.show',$etablissement->id)}}'" class="btn btn-inverse btn-outline-inverse" style="display: inline;margin-left: 60%"><i class="icofont icofont-info-square"></i> Retour </a> -->
+                                </div>
+                        </form>
+
+                       </div>
                     </div>
                 </div>
             </div>
-              <!-- tabs card end  -->
 
-   
+
 @endsection
 
 @section('script')
-      
+
 @endsection

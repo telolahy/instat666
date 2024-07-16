@@ -13,4 +13,19 @@ class Province extends Model
     {
         return $this->hasMany(Region::class);
     }
+
+    public static function getProvinceProprietaire($id)
+    {
+        $etablissement = Etablissement::with('proprietaires')->find($id);
+        $proprietaire = $etablissement->proprietaires->first();
+        $province = Province::where('id', $proprietaire->province_id)->first();
+        return ($province);
+    }
+
+    public static function getProvinceEtab($id)
+    {
+        $etablissement = Etablissement::with('proprietaires')->find($id);
+        $province = Province::where('id', $etablissement->province_id)->first();
+        return ($province);
+    }
 }
