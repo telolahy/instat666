@@ -30,7 +30,7 @@ class Region extends Model
     public static function getRegionsUser()
     {
         $region_user = DB::table('regions')
-                        ->select('id','region')
+                        // ->select('id','region')
                         ->where('id',Auth()->user()->region_id)->first();
         return ($region_user);
     }

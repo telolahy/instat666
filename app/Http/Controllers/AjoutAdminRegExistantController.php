@@ -1,11 +1,17 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
 
 use App\Models\Lchef;
+use App\Models\Region;
+use App\Models\Commune;
+use App\Models\Section;
 use App\Models\Activite;
+use App\Models\District;
+use App\Models\Province;
 use App\Models\Fokontany;
 use App\Models\Juridique;
+use App\Models\Nationalite;
 use App\Models\Proprietaire;
 use Illuminate\Http\Request;
 use App\Models\Etablissement;
@@ -69,20 +75,24 @@ class AjoutAdminRegExistantController extends Controller
     {
         $proprietaire  = Proprietaire::find($id);
 
-        $fokontany_etab = Fokontany::All();
-        $activite_etab = Activite::All();
+        $nationalite = Nationalite::All();
+        $provinces = Province::all();
+        $regions = Region::all();
+        $districts = District::all();
+        $communes = Commune::all();
+        $fokontanis = Fokontany::All();
+        $sections = Section::all();
+
+        $district_users = District::getDistrictsUser();
+        $region_user = Region::getRegionsUser();
         $lchefs = Lchef::All();
         $juridiques = Juridique::All();
-
-        $code_region = DB::table('communes')
+        $code_region = DB::table('regions')
             ->select('code_region')
-            ->where('region', '=', Auth()->user()->region_user)->first();
+            ->where('id', '=', Auth()->user()->region_id)->first();
 
-        $communes = DB::table('communes')
-            ->select('commune', 'id')
-            ->where('region', '=', Auth()->user()->region_user)
-            ->groupBy('commune')
-            ->get();
+        // // dd($code_region);
+
 
         $dernier_ligne = Etablissement::orderBy('created_at', 'DESC')->first();
 
@@ -103,14 +113,27 @@ class AjoutAdminRegExistantController extends Controller
         $identification_stat = $code_region->code_region . "-" . $today_year . "-" . $num_sequenciel;
 
         return view('admin_reg.ajout_existant.edit')
-            ->with('identification_stat', $identification_stat)
-            ->with('fokontany_etab', $fokontany_etab)
-            ->with('activites', $activite_etab)
-            ->with('lchefs', $lchefs)
+            // ->with('commune', $commune)
+            ->with('proprietaire', $proprietaire)
+            ->with('nationalites', $nationalite)
+            ->with('fokontanis', $fokontanis)
+            ->with('regions', $regions)
+            ->with('districts', $districts)
+            ->with('provinces', $provinces)
+            ->with('district_users', $district_users)
             ->with('communes', $communes)
+            ->with('region_user', $region_user)
+            // ->with('fokontany_etab', $fokontany_etab)
+            // ->with('activites', $activite_etab)
+            ->with('lchefs', $lchefs)
+            // ->with('communes', $communes)
             ->with('juridiques', $juridiques)
-            ->with('proprietaire', $proprietaire);
+            ->with('provinces', $provinces)
+            ->with('identification_stat', $identification_stat)
+            ->with('sections', $sections);
     }
+        
+
 
     /**
      * Update the specified resource in storage.
