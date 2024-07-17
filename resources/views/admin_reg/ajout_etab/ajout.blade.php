@@ -141,6 +141,7 @@
                                 <div class="col">
                                     <label class="">District :</label>
                                     <select class="form-control" name="district_etab" id="district_etab">
+                                        <option value="">selectionner district</option>
                                         @foreach ($district_users as $district_user)
                                         <option value="{{$district_user->id}}">{{$district_user->district}}</option>
                                         @endforeach
