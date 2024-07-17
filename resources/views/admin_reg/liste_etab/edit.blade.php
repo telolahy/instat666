@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="col">
                                     <label class="">Numéro Tel Etablissement : <span style="color: red">*</span></label>
-                                    <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10" name="tel_etab"  id="tel_etab" placeholder="Telephone établissement" value="{{$etablissement->tel_etab}}"/>
+                                    <input type="text" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10" name="tel_etab"  id="tel_etab" placeholder="Telephone établissement" value="{{$etablissement->tel_etab}}"/>
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="">Numéro patente : <span style="color: red">*</span></label>
@@ -284,7 +284,12 @@
                                 <div class="col">
                                     <label class="">Section:</label>
                                     <select class="form-control"  name="section_1" id="section_1">
-                                        <option value="{{$section_sec1->id}}" selected>{{$section_sec1->type_section}}</option>
+                                        @if ($section_sec1)
+                                            <option value="{{$section_sec1->id}}" selected>{{$section_sec1->type_section}}</option>
+                                        @else
+                                            <option value="">Selectionner une section</option>
+                                        @endif
+                                        
                                          @foreach ($sections as $section)
                                             <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
                                         @endforeach 
@@ -293,28 +298,36 @@
                                 <div class="col">
                                     <label class="">Division :</label>
                                     <select class="form-control" name="division_1" id="division_1">
-                                        <option value="{{$division_sec1->id}}" selected>{{$division_sec1->type_division}}</option>
+                                        @if ($division_sec1)
+                                            <option value="{{$division_sec1->id}}" selected>{{$division_sec1->type_division}}</option>
+                                        @endif
                                     
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label class="">Groupe :</label>
                                     <select class="form-control" name="groupe_1" id="groupe_1">
-                                       <option value="{{$groupe_sec1->id}}" selected>{{$groupe_sec1->type_groupe}}</option>
+                                        @if ($groupe_sec1)
+                                            <option value="{{$groupe_sec1->id}}" selected>{{$groupe_sec1->type_groupe}}</option>
+                                        @endif
 
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label class="">Classe :</label>
                                     <select class="form-control" name="classe_1" id="classe_1">
-                                       <option value="{{$classe_sec1->id}}" selected>{{$classe_sec1->type_classe}}</option>
+                                        @if ($classe_sec1)
+                                            <option value="{{$classe_sec1->id}}" selected>{{$classe_sec1->type_classe}}</option>
+                                        @endif
 
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label class="">Categorie :</label>
                                     <select class="form-control" name="categorie_1" id="categorie_1">
-                                       <option value="{{$categorie_sec1->id}}" selected>{{$categorie_sec1->type_categorie}}</option>
+                                        @if ($categorie_sec1)
+                                            <option value="{{$categorie_sec1->id}}" selected>{{$categorie_sec1->type_categorie}}</option>
+                                        @endif
 
                                     </select>
                                 </div>
@@ -336,7 +349,12 @@
                                 <div class="col">
                                     <label class="">Section:</label>
                                     <select class="form-control"  name="section_2" id="section_2">
-                                        <option value="{{$section_sec2->id}}" selected>{{$section_sec2->type_section}}</option>
+                                        @if ($section_sec2)
+                                            <option value="{{$section_sec2->id}}" selected>{{$section_sec2->type_section}}</option>
+                                        @else
+                                            <option value="">Selectionner une section</option>
+                                        @endif
+                                        
                                          @foreach ($sections as $section)
                                             <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
                                         @endforeach 
@@ -345,28 +363,36 @@
                                 <div class="col">
                                     <label class="">Division :</label>
                                     <select class="form-control" name="division_2" id="division_2">
-                                        <option value="{{$division_sec2->id}}" selected>{{$division_sec2->type_division}}</option>
+                                        @if ($division_sec2)
+                                            <option value="{{$division_sec2->id}}" selected>{{$division_sec2->type_division}}</option>
+                                        @endif
                                     
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label class="">Groupe :</label>
                                     <select class="form-control" name="groupe_2" id="groupe_2">
-                                       <option value="{{$groupe_sec2->id}}" selected>{{$groupe_sec2->type_groupe}}</option>
+                                        @if ($groupe_sec2)
+                                            <option value="{{$groupe_sec2->id}}" selected>{{$groupe_sec2->type_groupe}}</option>
+                                        @endif
 
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label class="">Classe :</label>
                                     <select class="form-control" name="classe_2" id="classe_2">
-                                       <option value="{{$classe_sec2->id}}" selected>{{$classe_sec2->type_classe}}</option>
+                                        @if ($classe_sec2)
+                                            <option value="{{$classe_sec2->id}}" selected>{{$classe_sec2->type_classe}}</option>
+                                        @endif
 
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label class="">Categorie :</label>
                                     <select class="form-control" name="categorie_2" id="categorie_2">
-                                       <option value="{{$categorie_sec2->id}}" selected>{{$categorie_sec2->type_categorie}}</option>
+                                        @if ($categorie_sec2)
+                                            <option value="{{$categorie_sec2->id}}" selected>{{$categorie_sec2->type_categorie}}</option>
+                                        @endif
 
                                     </select>
                                 </div>
