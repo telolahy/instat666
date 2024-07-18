@@ -79,6 +79,36 @@
                                     <h4 class="title" style="text-align: center">Nouveau Propriétaire</h4><hr/>
                               </div>
                               <div class="form-group row">
+                                <div class="col">
+                                    <label class="">Province : <span style="color: red">*</span></label>
+                                    <select class="form-control province" name="province" id="province">
+                                         <option value="">Sélectionnez une province</option>
+                                         @foreach ($provinces as $province)
+                                            <option value="{{$province->id}}">{{$province->nom_province}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="">Région : <span style="color: red">*</span></label>
+                                    <select class="form-control region" name="region" id="region">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">District :</label>
+                                    <select class="form-control" name="district" id="district">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Commune :</label>
+                                    <select class="form-control" name="commune" id="commune">
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
+                              <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">CIN : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
                                       <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "12" name="cin"  id="cin" placeholder="CIN"/>
@@ -91,17 +121,18 @@
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Nationalité : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="nationalite_proprietaire" id="nationalite_proprietaire"  >
-                                            @foreach ($nationalites as $nationalite)
-                                            <option value="{{ $nationalite->id }}">
-                                                {{ $nationalite->nationalite }}
-                                            </option>
-                                            @endforeach
-                                        </select><br/>
-                                  </div>
-                              </div>
+                                <label class="col-sm-2 col-form-label">Nationalité : <span style="color: red">*</span></label>
+                                <div class="col-sm-10">
+                                      <select class="form-control" required name="nationalite_id" value="{{ old('nationalite_id') }}" id="nationalite_proprietaire"  >
+                                          <option value="86" {{ old('nationalite_id') == '86' ? 'selected' : '' }}>MG</option>
+                                          @foreach ($nationalites as $nationalite)
+                                          <option value="{{ $nationalite->id }}" {{ old('nationalite_id') == $nationalite->id ? 'selected' : '' }}>
+                                              {{ $nationalite->nationalite }}
+                                          </option>
+                                          @endforeach
+                                      </select><br/>
+                                </div>
+                            </div>
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
@@ -109,29 +140,13 @@
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Fokontany : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="fokotany_proprietaire" id="fokotany_proprietaire"  >
-                                            @foreach ($fokontanys as $fokotany)
-                                            <option value="{{ $fokotany->id }}">
-                                                {{ $fokotany->fokotany }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                  </div>
+                                <label class="col-sm-2 col-form-label">Fokontany : <span style="color: red">*</span></label>
+                                <div class="col-sm-10">
+                                      <select class="form-control" required name="fokontany" id="fokontany"  >
+                                      </select>
                                 </div>
-                                <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Commune : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="commune_proprio" id="commune_proprio"  >
-                                            @foreach ($communes as $commune)
-                                            <option value="{{ $commune->id }}">
-                                                {{ $commune->commune}}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                  </div>
-                                </div>
+                            </div>
+                               
                                 <div class="form-group row">
                                     <div class="col">
                                         <label class="">Numéro Tel : <span style="color: red">*</span></label>
