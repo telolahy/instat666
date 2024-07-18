@@ -248,19 +248,8 @@ class EtablissementController extends Controller
 
     public function list_annulation_etablissement()
     {
-        if (Auth()->user()->role == "admin_par_region") {
-            $etablissements = DB::table('communes')
-                ->join('etablissements as a', 'a.commune_id', '=', 'communes.id')
-                ->join('proprietaires', 'proprietaires.id', '=', 'a.proprietaire_id')
-                ->join('etablissements as b', 'b.proprietaire_id', '=', 'proprietaires.id')
-                ->select('*')
-                ->where('region', '=', Auth()->user()->region_user)->orderBy('b.created_at', 'desc')->get();
-        } else {
-            $etablissements = DB::table('proprietaires')
-                ->join('etablissements', 'etablissements.proprietaire_id', '=', 'proprietaires.id')
-                ->select('*')
-                ->orderBy('etablissements.created_at', 'desc')->get();
-        }
+        $etablissements = Etablissement::getEtabUser();
+        //  dd($etablissements);
         return view('etablissement.list_annulation_etablissement')->with('etablissements', $etablissements);
     }
 
