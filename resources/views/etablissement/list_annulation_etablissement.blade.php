@@ -42,7 +42,7 @@
                                         </td>
                                         <td>
                                           @if ($etablissement->type == "Annulation")
-                                            <a onclick="window.location='{{url('/certificat_annulation_etablissement/'.$etablissement->id)}}'" data-toggle="tooltip" title="Certificat d'annulation" class="certificat_annulation"><h6><i class="ti ti-import" style="color: #04eb04b7"></i></h6></a><br/>
+                                            <a onclick="window.location='{{url('/certificat_annulation_etablissement/'.$etablissement->id)}}'" data-toggle="tooltip" title="Certificat d'annulation telo" class="certificat_annulation"><h6><i class="ti ti-import" style="color: #04eb04b7"></i></h6></a><br/>
                                           @else
                                             <a  data-toggle="tooltip" title="Annuler cet établissement" class="annulation" id="a_{{$etablissement->id}}" name="{{$etablissement->id}}"><h6><i class="ti ti-close" style="color: #fa0909;"></i></h6></a>
                                             <a onclick="window.location='{{url('/certificat_annulation_etablissement/'.$etablissement->id)}}'" data-toggle="tooltip" title="Certificat d'annulation" class="certificat_annulation" id="c_{{$etablissement->id}}" style="display: none"><h6><i class="ti ti-import" style="color: #04eb04b7"></i></h6></a><br/>
