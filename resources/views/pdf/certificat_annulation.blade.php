@@ -87,7 +87,7 @@
              Je soussigné le Directeur Inter Régional de {{ ucfirst($province) }}, certifie que
         </p>
         @endif
-        <p class="nom">{{$etablissement->proprietaire->nom}}</p>
+        <p class="nom">{{$etablissement->proprietaires->first()->nom}}</p>
         <p class="text"> dont le siège sociales <span class="value"> {{$etablissement->adresse_etab}} {{$etablissement->fokontany->fokotany}}</span></p>
         <p class="text"> a deposé une demande d'annulation de son inscription à {{ ucfirst($province) }}, le {{$date_now}}.</p>
         <p class="text"> Cette demande a été accompagnée de sa Carte d'Identification Statistique: <span class="value"> {{$activite}}-{{$region}}-{{$annee}}-{{$lien}}-{{$code}}</span></p>

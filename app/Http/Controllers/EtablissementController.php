@@ -276,8 +276,8 @@ class EtablissementController extends Controller
 
         ini_set('max_execution_time', 600);
         $tab = explode("-", $etablissement->identification_stat);
-        $activite = $etablissement->activite->categorie;
-        $lien = $etablissement->proprietaire->lien;
+        $activite = $etablissement->activite_princ;
+        $lien = $etablissement->proprietaires->first()->lien;
         $date_creation = Carbon::parse($etablissement->created_at)->isoFormat('DD/MM/YYYY');
         $date_now = Carbon::now()->isoFormat('DD/MM/YYYY');
         $region = $tab[0];
@@ -293,7 +293,7 @@ class EtablissementController extends Controller
         PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
         $pdf = PDF::loadView('pdf.certificat_annulation', compact('etablissement', 'activite', 'region', 'annee', 'code', 'lien', 'date_now', 'province', 'date_creation'));
 
-        return $pdf->download('Cert_annulation' . '_' . $etablissement->proprietaire->nom . '.pdf');
+        return $pdf->download('Cert_annulation' . '_' . $etablissement->proprietaires->first()->nom . '.pdf');
     }
 
     // ******************************liste des etablissement annulé
