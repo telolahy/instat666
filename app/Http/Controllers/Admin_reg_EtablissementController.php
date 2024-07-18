@@ -55,13 +55,6 @@ class Admin_reg_EtablissementController extends Controller
      */
     public function index()
     {
-        // $etablissements = Etablissement::with('proprietaires')
-        //     ->join('communes', 'etablissements.commune_id', '=', 'communes.id')
-        //     ->join('users', 'users.region_user', '=', 'communes.region')
-        //     ->select('etablissements.*', 'communes.commune as nom_commune', 'users.region_user', 'communes.id as id_commune')
-        //     ->distinct()
-        //     ->paginate(8);
-
         $region_user =Region::getRegionsUser();
         
         $etablissements = Etablissement::with('proprietaires')
@@ -126,7 +119,7 @@ class Admin_reg_EtablissementController extends Controller
     public function edit($id)
     {
         $etablissement = Etablissement::with('proprietaires')->find($id);
-
+        $identification_stat = $etablissement->identification_stat;
         $province_prop = Province::getProvinceProprietaire($id);
         $region_prop = Region::getRegionProprietaire($id);
         $district_prop = District::getDistrictProprietaire($id);
@@ -156,8 +149,6 @@ class Admin_reg_EtablissementController extends Controller
         $classe_sec2 = Classe::getClasse2Etab($id);
         $categorie_sec2 = Categorie::getCategorie2Etab($id);
 
-        
-        // dd($nationalite_prop->nationalite);
         $nationalite = Nationalite::All();
         $provinces = Province::all();
         $regions = Region::all();
@@ -170,29 +161,6 @@ class Admin_reg_EtablissementController extends Controller
         $region_user = Region::getRegionsUser();
         $lchefs = Lchef::All();
         $juridiques = Juridique::All();
-        $code_region = DB::table('regions')
-            ->select('code_region')
-            ->where('id', '=', Auth()->user()->region_id)->first();
-
-      
-
-        $dernier_ligne = Etablissement::orderBy('created_at', 'DESC')->first();
-
-        $today = Carbon::now();
-        $today_year = $today->year;
-
-        if ($dernier_ligne != null) {
-            if ($today_year > $dernier_ligne->created_at->year) {
-
-                $num_sequenciel = "00000";
-            } else {
-
-                $num_sequenciel = str_pad($dernier_ligne->id, 5, "0", STR_PAD_LEFT);
-            }
-        } else {
-            $num_sequenciel = "00000";
-        }
-        $identification_stat = $code_region->code_region . "-" . $today_year . "-" . $num_sequenciel;
         return view('admin_reg.liste_etab.edit')
             ->with('nationalites', $nationalite)
             ->with('section_etab', $section_etab)
@@ -244,6 +212,7 @@ class Admin_reg_EtablissementController extends Controller
      */
     public function update(Request $request, $id)
     {   
+        
         $validator = Validator::make($request->all(), [
             //proprietaire validation
             'cin' => 'required',

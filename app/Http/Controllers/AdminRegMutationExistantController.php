@@ -118,7 +118,9 @@ class AdminRegMutationExistantController extends Controller
         //                     ->get();
 
     
-        return view('admin_reg.mutation_existant.edit_existant')->with('etablissement', $etablissement)->with('new_proprietaires',$new_proprietaires);
+        return view('admin_reg.mutation_existant.edit_existant')
+                ->with('etablissement', $etablissement)
+                ->with('new_proprietaires',$new_proprietaires);
     }
 
 

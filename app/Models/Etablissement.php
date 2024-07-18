@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Etablissement extends Model
 {
@@ -86,4 +87,12 @@ class Etablissement extends Model
         $categorie = Categorie::where('id', $etablissement->categorie_id)->first();
         return ($categorie);
     }
+
+    public static function getEtabUser()
+    {
+        $etab_user = Etablissement::with('proprietaires')
+                        ->where('user_id',Auth()->user()->id)->get();
+        return ($etab_user);
+    }
+    
 }

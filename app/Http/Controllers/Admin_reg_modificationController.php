@@ -81,6 +81,7 @@ class Admin_reg_modificationController extends Controller
        
         $etablissement = Etablissement::with('proprietaires')->find($id);
 
+        $identification_stat = $etablissement->identification_stat;
         $province_prop = Province::getProvinceProprietaire($id);
         $region_prop = Region::getRegionProprietaire($id);
         $district_prop = District::getDistrictProprietaire($id);
@@ -130,24 +131,24 @@ class Admin_reg_modificationController extends Controller
 
       
 
-        $dernier_ligne = Etablissement::orderBy('created_at', 'DESC')->first();
+        // $dernier_ligne = Etablissement::orderBy('created_at', 'DESC')->first();
 
-        $today = Carbon::now();
-        $today_year = $today->year;
+        // $today = Carbon::now();
+        // $today_year = $today->year;
 
-        if ($dernier_ligne != null) {
-            if ($today_year > $dernier_ligne->created_at->year) {
+        // if ($dernier_ligne != null) {
+        //     if ($today_year > $dernier_ligne->created_at->year) {
 
-                $num_sequenciel = "00000";
-            } else {
+        //         $num_sequenciel = "00000";
+        //     } else {
 
-                $num_sequenciel = str_pad($dernier_ligne->id, 5, "0", STR_PAD_LEFT);
-            }
-        } else {
-            $num_sequenciel = "00000";
-        }
+        //         $num_sequenciel = str_pad($dernier_ligne->id, 5, "0", STR_PAD_LEFT);
+        //     }
+        // } else {
+        //     $num_sequenciel = "00000";
+        // }
 
-        $identification_stat = $code_region->code_region . "-" . $today_year . "-" . $num_sequenciel;
+       // $identification_stat = $code_region->code_region . "-" . $today_year . "-" . $num_sequenciel;
         return view('admin_reg.modification.edit')
             ->with('nationalites', $nationalite)
             ->with('section_etab', $section_etab)
@@ -218,14 +219,15 @@ class Admin_reg_modificationController extends Controller
        if ($validator->fails()) {
            return redirect()->back()->withErrors($validator)->withInput();
        }
-
-        $etablissement = new Etablissement();
+        $etablissement = Etablissement::findOrFail($id);
+        $proprietaire = $etablissement->proprietaires;
+       
         $categorie = Categorie::findOrFail($request->input('categorie_0'));
         $province_etab = Region::findOrFail($request->input('region_etab'));
         
         
         $etablissement->user_id = Auth::user()->id;
-        $etablissement->identification_stat = $request->input('identification_stat');
+       // $etablissement->identification_stat = $request->input('identification_stat');
         $etablissement->sigle = $request->input('sigle');
         $etablissement->adresse_etab = $request->input('adresse_etab');
 
@@ -275,14 +277,14 @@ class Admin_reg_modificationController extends Controller
 
 
 
-        $proprietaire =Proprietaire::findOrFail($id);
-        $proprietaire->lien = (int)$proprietaire->lien + 1;
+       
+        // $proprietaire->lien = (int)$proprietaire->lien + 1;
         $etablissement->save();
-        $proprietaire->save();
-        $etablissement->proprietaires()->attach($proprietaire->id);
+        //$proprietaire->save();
+        //$etablissement->proprietaires()->attach($proprietaire->id);
         
         return redirect()->route('reg_etab.index')->with('message', 'Données envoyées avec succès !!!');
-       return redirect()->route('reg_etab.index')->with('success', 'Données envoyées avec succès !!!');
+    //    return redirect()->route('reg_etab.index')->with('success', 'Données envoyées avec succès !!!');
     }
 
     /**
