@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Dompdf\Dompdf;
+use App\Models\Region;
+use App\Models\Commune;
+use App\Models\District;
 use App\Models\Quitance;
+use App\Models\Categorie;
 use App\Models\Fokontany;
 use App\Models\Nationalite;
 use App\Models\Proprietaire;
+use Illuminate\Http\Request;
 use App\Models\Etablissement;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -126,22 +130,7 @@ class EtablissementController extends Controller
 
     public function list_etab_certificat()
     {
-        if (Auth()->user()->role == "admin_par_region") {
-            $etablissements = DB::table('communes')
-                ->join('etablissements as a', 'a.commune_id', '=', 'communes.id')
-                ->join('proprietaires', 'proprietaires.id', '=', 'a.proprietaire_id')
-                ->join('etablissements as b', 'b.proprietaire_id', '=', 'proprietaires.id')
-                ->select('*')
-                ->where([
-                    ['region', '=', Auth()->user()->region_user],
-                    ['b.type', '<>', 'annulation']
-                ])->orderBy('b.created_at', 'desc')->get();
-        } else {
-            $etablissements = DB::table('proprietaires')
-                ->join('etablissements', 'etablissements.proprietaire_id', '=', 'proprietaires.id')
-                ->select('*')
-                ->orderBy('etablissements.created_at', 'desc')->get();
-        }
+        $etablissements = Etablissement::getEtabUser();
         return view('etablissement.list_etab_obtenir_certificat')->with('etablissements', $etablissements);
     }
 
@@ -200,11 +189,16 @@ class EtablissementController extends Controller
     {
 
         $etablissement = Etablissement::find($id);
-
         ini_set('max_execution_time', 600);
+        $categorie_Etab=Categorie::getCategorieEtab($id);
+        $region_Etab = Region::getRegionEtablissement($id);
+        $district_Etab = District::getDistrictEtablissement($id);
+        $commune_Etab = Commune::getCommuneEtablissement($id);
+        $nationalite_Prop = Nationalite::getNationaliteProp($id);
+        $fokontany_Etab = Fokontany::getFokontanyEtablissement($id);
         $tab = explode("-", $etablissement->identification_stat);
-        $activite = $etablissement->activite->categorie;
-        $lien = $etablissement->proprietaire->lien;
+        $activite = $etablissement->activite_princ;
+        $lien = $etablissement->proprietaires->first()->lien;
         $date_now = Carbon::now()->isoFormat('DD/MM/YYYY');
         $region = $tab[0];
         $annee = $tab[1];
@@ -239,9 +233,9 @@ class EtablissementController extends Controller
         $date_now = Carbon::now()->isoFormat('DD/MM/YYYY');
 
         PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
-        $pdf = PDF::loadView('pdf.certificat_existence', compact('etablissement', 'activite', 'region', 'annee', 'code', 'lien', 'date_now', 'province', 'type', 'date_type', 'date_now'));
+        $pdf = PDF::loadView('pdf.certificat_existence', compact('etablissement','nationalite_Prop', 'categorie_Etab', 'region_Etab','district_Etab','commune_Etab','fokontany_Etab', 'annee', 'code', 'lien', 'date_now', 'province', 'type', 'date_type', 'date_now'));
 
-        return $pdf->download('Cert_existence' . '_' . $etablissement->proprietaire->nom . '.pdf');
+        return $pdf->download('Cert_existence' . '_' . $etablissement->proprietaires->first()->nom . '.pdf');
     }
 
     // ******************afficher liste des etablissement pour l'annuler
