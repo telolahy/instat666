@@ -169,7 +169,7 @@ class Admin_reg_modificationController extends Controller
             ->with('fokontany_etab', $fokontany_etab)
             // ->with('fokontanis', $fokontanis)
             ->with('regions', $regions)
-            ->with('districts', $districts)
+            ->with('districts', $districts) 
             ->with('district_users', $district_users)
             ->with('communes', $communes)
             ->with('region_user', $region_user)

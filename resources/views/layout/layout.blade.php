@@ -527,31 +527,7 @@
                                 </ul> --}}
 
                                 {{-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other"></div> --}}
-                                <ul class="pcoded-item pcoded-left-item mt-5">
-                                    <li class="pcoded-hasmenu">
-                                        <a href="javascript:void(0)">
-                                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Utilisateur</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                        <ul class="pcoded-submenu">
-                                            <li class="{{(request()->is('form_user')? 'active' : '')}}">
-                                                <a href={{URL::to('/form_user')}}>
-                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Nouvel utilisateur</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                            <li class="{{(request()->is('list_user')? 'active' : '')}}">
-                                                <a href={{URL::to('/list_user')}}>
-                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Liste des utilisateurs</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                
                                 {{-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation"></div> --}}
                                 <ul class="pcoded-item pcoded-left-item mt-5">
                                     <li class="">
@@ -602,6 +578,32 @@
                                                 <a href={{URL::to('/statistique_quittance')}}>
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Graphique du nombre du quittance enregistré par type</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                                <ul class="pcoded-item pcoded-left-item mt-5">
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Utilisateur</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="{{(request()->is('form_user')? 'active' : '')}}">
+                                                <a href={{URL::to('/form_user')}}>
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Nouvel utilisateur</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                            <li class="{{(request()->is('list_user')? 'active' : '')}}">
+                                                <a href={{URL::to('/list_user')}}>
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Liste des utilisateurs</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>

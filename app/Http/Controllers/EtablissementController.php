@@ -294,26 +294,12 @@ class EtablissementController extends Controller
 
     public function list_reprise_etablissement()
     {
-        if (Auth()->user()->role == "admin_par_region") {
-            $etablissements = DB::table('communes')
-                ->join('etablissements as a', 'a.commune_id', '=', 'communes.id')
-                ->join('proprietaires', 'proprietaires.id', '=', 'a.proprietaire_id')
-                ->join('etablissements as b', 'b.proprietaire_id', '=', 'proprietaires.id')
-                ->select('*')
-                ->where([
-                    ['region', '=', Auth()->user()->region_user],
-                    ['b.type', '=', 'Annulation']
-                ])->orderBy('b.created_at', 'desc')->get();
-        } else {
-            $etablissements = DB::table('proprietaires')
-                ->join('etablissements', 'etablissements.proprietaire_id', '=', 'proprietaires.id')
-                ->select('*')
-                ->where('type', '=', 'Annulation')
-                ->orderBy('etablissements.created_at', 'desc')->get();
+
+        {
+            $etablissements = Etablissement::where('type', '=', 'Annulation')->get();
+            return view('etablissement.list_reprise_etablissement')->with('etablissements', $etablissements);
         }
-
-
-        return view('etablissement.list_reprise_etablissement')->with('etablissements', $etablissements);
+       
     }
 
     // ****************formulaire d'ajout de quittance pour la reprise d'etablissement
