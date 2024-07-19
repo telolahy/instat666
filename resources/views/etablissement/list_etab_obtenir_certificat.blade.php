@@ -33,8 +33,8 @@ List Commune
                                     <tr class="table" id={{$etablissement->id}}>
                                         <td>{{$etablissement->identification_stat}}</td>
                                         <td>{{$etablissement->sigle}}</td>
-                                        <td>{{$etablissement->cin}}</td>
-                                        <td>{{$etablissement->nom}}</td>
+                                        <td>{{$etablissement->proprietaires->first()->cin}}</td>
+                                        <td>{{$etablissement->proprietaires->first()->nom}}</td>
                                         <td>
                                             <a onclick="window.location='{{url('/form_quittance_certificat_existence/'.$etablissement->id)}}'" data-toggle="tooltip" title="Sélectionner cette etablissement" class="modifier" id=""><h6><i class="ti ti-marker-alt" style="color: #1e7e34"></i></h6></a><br/>
                                         </td>

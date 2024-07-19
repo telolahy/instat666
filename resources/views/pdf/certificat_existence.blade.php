@@ -128,33 +128,33 @@
         </p>
         @endif
         <p class="label"> Nom / Raison sociale:</p>
-        <span class="nom">{{$etablissement->proprietaire->nom}}</span> <br>
+        <span class="nom">{{$etablissement->proprietaires->first()->nom}}</span> <br>
         <p class="label"> Forme juridique:    </p>
         <span class="code">{{$etablissement->juridique->description_code_juridique}}</span><br>
         <p class="label"> Adresse:</p>
-        <span class="adresse">{{$etablissement->adresse_etab}} {{$etablissement->fokontany->fokotany}}</span> <br>
+        <span class="adresse">{{$etablissement->adresse_etab}} {{$fokontany_Etab->fokotany}}</span> <br>
         <p class="label"> Région / District / Commune: </p>
-        <span class="region">{{$etablissement->commune->region}} / {{$etablissement->commune->district}} / {{$etablissement->commune->commune}}</span><br>
+        <span class="region">{{$region_Etab->region}} / {{$district_Etab->district}} / {{$commune_Etab->commune}}</span><br>
         <p class="label"> Activité principale: </p>
-        <span class="activite">{{$etablissement->activite->description}}</span> <br>
+        <span class="activite">{{$etablissement->activite_princ}}</span> <br>
         <p class="label"> Activité secondaire 1: </p>
-        @if ($etablissement->activite_sec1 == "Néant")
+        @if ($etablissement->activite_sec1 == "")
             <span class="sec1">------Néant------</span><br> 
         @else
             <span class="sec1">{{$etablissement->activite_sec1}}</span><br>
         @endif
         <p class="label"> Activité secondaire 2:</p>
-        @if ($etablissement->activite_sec2 == "Néant")
+        @if ($etablissement->activite_sec2 == "")
             <span class="sec2">------Néant------</span><br> 
         @else
             <span class="sec1">{{$etablissement->activite_sec2}}</span><br>
         @endif
         <p class="label"> Identification statistique: </p>
-        <span class="identification">{{$activite}}-{{$region}}-{{$annee}}-{{$lien}}-{{$code}}</span><br>
+        <span class="identification">{{ $categorie_Etab->code_categorie}}-{{$region_Etab->code_region}}-{{$annee}}-{{$lien}}-{{$code}}</span><br>
         <p class="label"> Date et type de mise à jour:</p>
         <span class="type">{{$date_type}} - {{$type}}</span> <br>
         <p class="label"> Nationalité: </p>
-        <span class="nationalite">{{$etablissement->proprietaire->nationalite->nationalite}}</span><br>
+        <span class="nationalite">{{$nationalite_Prop->nationalite}}</span><br>
         <p> </p>
         <p class="text"> En foi de quoi, le présent certificat lui est delivré pour servir et valoir ce que de droit.</p>
         <p class="text"> Le numéro d'identification statistique doit être mentionné sur toute correspondance avec <br> l'administration publique.</p>

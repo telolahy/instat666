@@ -28,13 +28,13 @@
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">CIN :</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control form-control-bold form-control-center"  name="cin" id="cin" value="{{$etablissement->proprietaire->cin}}" readonly>
+                                      <input type="text" class="form-control form-control-bold form-control-center"  name="cin" id="cin" value="{{$etablissement->proprietaires->first()->cin}}" readonly>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Nom du propriétaire :</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control form-control-bold form-control-center"  name="nom" id="nom" value="{{$etablissement->proprietaire->nom}}" readonly>
+                                      <input type="text" class="form-control form-control-bold form-control-center"  name="nom" id="nom" value="{{$etablissement->proprietaires->first()->nom}}" readonly>
                                   </div>
                               </div>  
                             <hr/>
