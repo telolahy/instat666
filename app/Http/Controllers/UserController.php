@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Region;
 use App\Models\Commune;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -91,7 +92,7 @@ class UserController extends Controller
     public function list_user()
     {
         if (Auth()->user()->role == "admin_par_region") {
-            $users = User::where('region_user', Auth()->user()->region_user)->get();
+            $users = User::where('region_id', Auth()->user()->region_id)->get();
         } else {
             $users = User::all();
         }
@@ -112,13 +113,11 @@ class UserController extends Controller
     public function affiche_form_edit_user($id)
     {
         $user = User::find($id);
-        if (Auth()->user()->role == "admin_par_region") {
-            $communes = DB::table('communes')->select('region')
-                ->where('region', '=', Auth()->user()->region_user)->distinct()->get();
-        } else {
-            $communes = DB::table('communes')->select('region')->distinct()->get();
-        }
-        return view('user.edit_user')->with('user', $user)->with('communes', $communes);
+        $region_User=Region::getRegionsUser($id);
+        
+        return view('user.edit_user')
+               ->with('user', $user);
+               ->with('region_User', $region_User);
     }
 
     public function modifier_user(Request $request)

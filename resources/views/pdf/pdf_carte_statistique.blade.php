@@ -140,29 +140,37 @@
             .code {
                 width: 22%;
             }
+            
             .value {
-                font-weight: bold;
-                text-align: center;
-                font-size: 20px;
-                margin-top: 0.5%;
-            }
+            font-weight: bold;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 0.5%;
+        }
             .nomena {
-                margin-left: 55%;
-                width: 20%;
-                 height: 7%;
+                width: 40%;
+                margin-left: 1%;
+                display: inline-block;
+                vertical-align: top;
+                margin-bottom: 0%;
+            }
+
+            .tapitra {
+                width: 40%; 
+                margin-left: 18%;
+                display: inline-block;
+                vertical-align: top;
+                margin-bottom: 0%;
+            }
+            .label {
+                font-size: 16px;
+                font-style: italic;
                 display: inline-block;
             }
             .date {
-                margin-top: 12%;
-                font-size: 10px;
+                font-size: 16px;
                 font-style: italic;
-            }
-            .date_now {
-                width: 18%;
-                height: 5%;
-                margin-top: 1.5%;
-                border-style: solid;
-                border-width: 1px;
+                font-weight: bold;
                 display: inline-block;
             }
             .input {
@@ -309,9 +317,19 @@
                </div>
             </div>
         </div>
-        <div class="card2">  
-            <div class="nomena"><p class="date">Nomena tamin'ny (Délivré le) :</p></div>
-            <div class="date_now"><p class="value">{{$date_now}}</p></div>
+        <div class="card2">   
+            <div class="row">
+                <div class="col-2">
+                    <div class="nomena">
+                        <p class="label">Nomena tamin'ny (Délivré le) :</p>
+                        <p class="date">{{$date_now}}</p>
+                    </div>
+                    <div class="tapitra">
+                        <p class="label">Tapitra amin'ny (expiré le) :</p>
+                        <p class="date">{{ \Carbon\Carbon::now()->addYears(2)->format('d/m/Y') }}</p>
+                    </div>
+                </div> 
+            </div>
             <p class="input"> Anarana(Nom/Dénomination) :</p>
             <div class="div_nom"><p class="nom">{{$etablissement->proprietaires->first()->nom}}</p></div>
             <p class="input"> Anarana nahafehezina (Sigle) :</p>
