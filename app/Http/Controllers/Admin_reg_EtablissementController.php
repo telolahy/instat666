@@ -55,7 +55,7 @@ class Admin_reg_EtablissementController extends Controller
      */
     public function index()
     {
-        $region_user =Region::getRegionsUser();
+        $region_user =Region::getRegionsUser(); 
         
         $etablissements = Etablissement::with('proprietaires')
                         ->where('region_id', $region_user->id)->paginate(8);

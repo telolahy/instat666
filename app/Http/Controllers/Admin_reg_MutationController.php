@@ -36,7 +36,7 @@ class Admin_reg_MutationController extends Controller
         'nom' => 'required',
         'adresse' => 'required',
         'lien' => 'required',
-        'num_tel' => 'required',
+        'num_tel' => 'required', 
         'province' => 'required|exists:provinces,id',
         'region' => 'required|exists:regions,id',
         'district' => 'required|exists:districts,id',
@@ -166,7 +166,7 @@ class Admin_reg_MutationController extends Controller
         }
 
         $etablissement = Etablissement::findOrFail($id);
-        $proprietaire = $etablissement->proprietaire;
+        $proprietaire = $etablissement->proprietaire; 
         
         $proprietaire->cin = $request->input('cin');
         $proprietaire->nom = $request->input('nom');
