@@ -29,55 +29,85 @@
                       @endif
                       </div>
                            {{-- {!! Form::open(['action' => 'App\Http\Controllers\MutationController@ajout_mutation',  'method' => 'POST' , 'id' => 'proprietaireForm' ]) !!}  --}}
-                           <form action="{{route('mutation_ft',['etab_id'=>$etablissement->id, 'prop_id'=>$proprietaire->id])}}" method="POST" id="proprietaireForm">
+                           <form action="{{route('mutation_ft',['etab_id'=>$etablissement->id, 'prop_id'=>$etablissement->proprietaires->first()->id])}}" method="POST" id="proprietaireForm">
                             @csrf
                             {{-- @method('PUT') --}}
-                                <input type="hidden" class="form-control form-control-bold form-control-center"  name="id_proprietaire" id="id_proprietaire" value="{{$proprietaire->id}}" readonly> 
+                                <input type="hidden" class="form-control form-control-bold form-control-center"  name="id_proprietaire" id="id_proprietaire" value="{{$etablissement->proprietaires->first()->id}}" readonly> 
                                 <input type="hidden" class="form-control form-control-bold form-control-center"  name="id_etab" id="id_etab" value="{{$etablissement->id}}" readonly> 
                                 
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">CIN :</label>
                                   <div class="col-sm-10">
-                                      <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "12" name="ancien_cin"  id="ancien_cin" value="{{$proprietaire->cin}}" readonly/>
+                                      <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "12" name="ancien_cin"  id="ancien_cin" value="{{$etablissement->proprietaires->first()->cin}}" readonly/>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Nom Complet :</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control form-control-bold form-control-center" placeholder="Nom complet " name="ancien_nom" id="ancien_nom" value="{{$proprietaire->nom}}" readonly>
-                                      <input type="hidden" class="form-control form-control-bold form-control-center"  name="ancien_commune" id="ancien_commune" value="{{$proprietaire->commune->commune}}" readonly>
+                                      <input type="text" class="form-control form-control-bold form-control-center" placeholder="Nom complet " name="ancien_nom" id="ancien_nom" value="{{$etablissement->proprietaires->first()->nom}}" readonly>
+                                      <input type="hidden" class="form-control form-control-bold form-control-center"  name="ancien_commune" id="ancien_commune" value="{{$etablissement->proprietaires->first()->commune->commune}}" readonly>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Adresse :</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="ancien_adresse" id="ancien_adresse" value="{{$proprietaire->adresse}}" readonly>
+                                      <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="ancien_adresse" id="ancien_adresse" value="{{$etablissement->proprietaires->first()->adresse}}" readonly>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Fokotany :</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="ancien_fokotany" id="ancien_fokotany" value="{{$proprietaire->fokontany->fokotany}}" readonly>
+                                      <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="ancien_fokotany" id="ancien_fokotany" value="{{$etablissement->proprietaires->first()->fokontany->fokotany}}" readonly>
                                   </div>
                               </div>  
                               <div class="form-group row">
                                     <div class="col">
                                         <label class="">Numéro Tel :</label>
-                                        <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10" name="ancien_num_tel"  id="ancien_num_tel" value="{{$proprietaire->num_tel}}" readonly/>
+                                        <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10" name="ancien_num_tel"  id="ancien_num_tel" value="{{$etablissement->proprietaires->first()->num_tel}}" readonly/>
                                     </div>
                                     <div class="col-sm-4">
                                         <label class="">Lien :</label>
-                                        <input type="number" class="form-control form-control-bold form-control-center" placeholder="ancien_lien" name="ancien_lien" id="ancien_lien" value="{{$proprietaire->lien}}" readonly>
+                                        <input type="number" class="form-control form-control-bold form-control-center" placeholder="ancien_lien" name="ancien_lien" id="ancien_lien" value="{{$etablissement->proprietaires->first()->lien}}" readonly>
                                     </div>
                                     <div class="col">
                                         <label class="">Email (facultatif) :</label>
-                                        <input type="email" class="form-control form-control-bold form-control-center" placeholder="Email" name="ancien_email" id="ancien_email" value="{{$proprietaire->email}}" readonly>
+                                        <input type="email" class="form-control form-control-bold form-control-center" placeholder="Email" name="ancien_email" id="ancien_email" value="{{$etablissement->proprietaires->first()->email}}" readonly>
                                     </div>
                                 </div>
                               <br/><hr/>
                               <div class="header" style="padding-bottom: 3%">
                                     <h4 class="title" style="text-align: center">Nouveau Propriétaire</h4><hr/>
                               </div>
+                              <div class="form-group row">
+                                <div class="col">
+                                    <label class="">Province : <span style="color: red">*</span></label>
+                                    <select class="form-control province" name="province" id="province">
+                                         <option value="">Sélectionnez une province</option>
+                                         @foreach ($provinces as $province)
+                                            <option value="{{$province->id}}">{{$province->nom_province}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="">Région : <span style="color: red">*</span></label>
+                                    <select class="form-control region" name="region" id="region">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">District :</label>
+                                    <select class="form-control" name="district" id="district">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="">Commune :</label>
+                                    <select class="form-control" name="commune" id="commune">
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <hr>
+                            </div>
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">CIN : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
@@ -91,17 +121,18 @@
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Nationalité : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="nationalite_proprietaire" id="nationalite_proprietaire"  >
-                                            @foreach ($nationalites as $nationalite)
-                                            <option value="{{ $nationalite->id }}">
-                                                {{ $nationalite->nationalite }}
-                                            </option>
-                                            @endforeach
-                                        </select><br/>
-                                  </div>
-                              </div>
+                                <label class="col-sm-2 col-form-label">Nationalité : <span style="color: red">*</span></label>
+                                <div class="col-sm-10">
+                                      <select class="form-control" required name="nationalite_id" value="{{ old('nationalite_id') }}" id="nationalite_proprietaire"  >
+                                          <option value="86" {{ old('nationalite_id') == '86' ? 'selected' : '' }}>MG</option>
+                                          @foreach ($nationalites as $nationalite)
+                                          <option value="{{ $nationalite->id }}" {{ old('nationalite_id') == $nationalite->id ? 'selected' : '' }}>
+                                              {{ $nationalite->nationalite }}
+                                          </option>
+                                          @endforeach
+                                      </select><br/>
+                                </div>
+                            </div>
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
@@ -109,29 +140,13 @@
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Fokontany : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="fokotany_proprietaire" id="fokotany_proprietaire"  >
-                                            @foreach ($fokontanys as $fokotany)
-                                            <option value="{{ $fokotany->id }}">
-                                                {{ $fokotany->fokotany }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                  </div>
+                                <label class="col-sm-2 col-form-label">Fokontany : <span style="color: red">*</span></label>
+                                <div class="col-sm-10">
+                                      <select class="form-control" required name="fokontany" id="fokontany"  >
+                                      </select>
                                 </div>
-                                <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label">Commune : <span style="color: red">*</span></label>
-                                  <div class="col-sm-10">
-                                        <select class="form-control" required name="commune_proprio" id="commune_proprio"  >
-                                            @foreach ($communes as $commune)
-                                            <option value="{{ $commune->id }}">
-                                                {{ $commune->commune}}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                  </div>
-                                </div>
+                            </div>
+                               
                                 <div class="form-group row">
                                     <div class="col">
                                         <label class="">Numéro Tel : <span style="color: red">*</span></label>
@@ -203,5 +218,5 @@
 @endsection
 
 @section('script')
-      
+       
 @endsection

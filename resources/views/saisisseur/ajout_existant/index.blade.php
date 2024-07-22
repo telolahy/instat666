@@ -36,7 +36,7 @@ List Commune
                                       <td>{{ $proprietaire->cin }}</td>
                                       <td>{{ $proprietaire->nom }}</td>
                                       <td>
-                                          <a href="{{ route('add_reg_existant.edit', $proprietaire->id) }}" class="btn btn-outline-primary" id="">Ajouter</a><br/>
+                                          <a href="{{ route('ajout_saisisseur_Existant.edit', $proprietaire->id) }}" class="btn btn-outline-primary" id="">Ajouter</a><br/>
                                       </td>
                                   </tr>  
                               @endif

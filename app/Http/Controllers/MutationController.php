@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use App\Models\Activite;
 use App\Models\Ancien_proprietaire;
 use App\Models\Commune;
