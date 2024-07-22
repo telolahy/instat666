@@ -46,7 +46,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/select2/css/select2.min.css')}}">
 
     <link rel="stylesheet" type="text/css" href="{{asset('gstatic/44/css/util/util.css')}}">
-
     <style>
         #logo {
             max-width: 70px;
@@ -79,10 +78,6 @@
             height: 1px;
             background-color: black;
         }
-
-
-
-
     </style>
 </head>
 
@@ -188,7 +183,7 @@
                                         <li class="{{(request()->is('home')? 'active' : '')}}">
                                             <a href={{URL::to('/home')}}>
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b></b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Accueil</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Acueil</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -198,7 +193,7 @@
                                         <li class="pcoded-hasmenu ">
                                             <a href="javascript:void(0)">
                                                 <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b></b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Propriétaire / <br> Etablissement</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Propietaire / <br> Etablissement</span>
                                             </a>
                                             <ul class="pcoded-submenu">
                                                 <li class="pcoded-hasmenu ">
@@ -210,7 +205,7 @@
                                                     <ul class="pcoded-submenu">
                                                         {{-- <li class="{{(request()->is('list_com_prop')? 'active' : '')}}"> --}}
                                                         <li>
-                                                            <a href="{{route('ajout_saisisseur.index')}}">
+                                                            <a href="{{route('ajout_saisisseur_ft')}}">
                                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                                 <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Nouveau Proprietaire / Etablissement</span>
                                                                 <span class="pcoded-mcaret"></span>
@@ -272,7 +267,7 @@
                                     <li class="{{(request()->is('home')? 'active' : '')}}">
                                         <a href={{URL::to('/home')}}>
                                             <span class="pcoded-micon"><i class="ti-home"></i><b></b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Accueil</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Acueil</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
@@ -283,7 +278,7 @@
                                     <li class="pcoded-hasmenu ">
                                         <a href="javascript:void(0)">
                                             <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b></b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Propriétaire / <br> Etablissement</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Propietaire / <br> Etablissement</span>
                                         </a>
                                 <ul class="pcoded-submenu">
 
@@ -531,12 +526,13 @@
                                     </li>
                                 </ul> --}}
 
+                                {{-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other"></div> --}}
                                 
                                 {{-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation"></div> --}}
                                 <ul class="pcoded-item pcoded-left-item mt-5">
                                     <li class="">
                                         <a href={{URL::to('/list_etab_certificat')}}>
-                                            <span class="pcoded-micon"><i class="ti-book"></i><b></b></span>
+                                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b></b></span>
                                             <span class="pcoded-mtext" data-i18n="nav.dash.main">Obtenir de certificat d'existence</span>
                                         </a>
                                     </li>
@@ -561,40 +557,12 @@
                                         </a>
                                     </li>
                                 </ul> --}}
-
-                                {{-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other"></div> --}}
-                                <ul class="pcoded-item pcoded-left-item mt-5">
-                                    <li class="pcoded-hasmenu">
-                                        <a href="javascript:void(0)">
-                                            <span class="pcoded-micon"><i class="ti-user"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Utilisateur</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                        <ul class="pcoded-submenu">
-                                            <li class="{{(request()->is('form_user')? 'active' : '')}}">
-                                                <a href={{URL::to('/form_user')}}>
-                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Nouvel utilisateur</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                            <li class="{{(request()->is('list_user')? 'active' : '')}}">
-                                                <a href={{URL::to('/list_user')}}>
-                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Liste des utilisateurs</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-
                                 {{-- <br> --}}
                                 {{-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation"></div> --}}
                                 <ul class="pcoded-item pcoded-left-item mt-5">
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)">
-                                            <span class="pcoded-micon"><i class="ti-bar-chart"></i></span>
+                                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
                                             <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Graphique</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
@@ -610,6 +578,32 @@
                                                 <a href={{URL::to('/statistique_quittance')}}>
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Graphique du nombre du quittance enregistré par type</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                                <ul class="pcoded-item pcoded-left-item mt-5">
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Utilisateur</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="{{(request()->is('form_user')? 'active' : '')}}">
+                                                <a href={{URL::to('/form_user')}}>
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Nouvel utilisateur</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                            <li class="{{(request()->is('list_user')? 'active' : '')}}">
+                                                <a href={{URL::to('/list_user')}}>
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Liste des utilisateurs</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
