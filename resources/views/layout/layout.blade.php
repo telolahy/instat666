@@ -205,7 +205,7 @@
                                                     <ul class="pcoded-submenu">
                                                         {{-- <li class="{{(request()->is('list_com_prop')? 'active' : '')}}"> --}}
                                                         <li>
-                                                            <a href="{{route('ajout_saisisseur.index')}}">
+                                                            <a href="{{route('ajout_saisisseur_ft')}}">
                                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                                 <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Nouveau Proprietaire / Etablissement</span>
                                                                 <span class="pcoded-mcaret"></span>
