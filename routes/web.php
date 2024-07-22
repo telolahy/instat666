@@ -164,12 +164,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/import_excel', [ExcelController::class, 'import_excel']);
     Route::get('/import_excel', [ExcelController::class, 'import_excel']);
 
-    //SAISISSEUR 
+    //SAISISSEUR  
 
     //ajout
     Route::resource('ajout_saisisseur', AjoutSaisisseurController::class);
     Route::get('/search_commune', [AjoutSaisisseurController::class, 'ft_search'])->name('search_commune');
-    Route::get('/ajout_saisisseur_ft/{id}', [AjoutSaisisseurController::class, 'ajout'])->name('ajout_saisisseur_ft');
+    Route::get('/ajout_saisisseur_ft', [AjoutSaisisseurController::class, 'ajout'])->name('ajout_saisisseur_ft');
     Route::resource('ajout_saisisseur_Existant', AjoutSaisisseurExistantController::class);
 
     //modification

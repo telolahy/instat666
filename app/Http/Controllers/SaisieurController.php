@@ -3,16 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lchef;
+use App\Models\Classe;
+use App\Models\Groupe;
+use App\Models\Region;
 use App\Models\Commune;
+use App\Models\Section;
 use App\Models\Activite;
+use App\Models\District;
+use App\Models\Division;
+use App\Models\Province;
+use App\Models\Categorie;
 use App\Models\Fokontany;
 use App\Models\Juridique;
 use App\Models\Nationalite;
+use App\Models\Proprietaire;
 use Illuminate\Http\Request;
 use App\Models\Etablissement;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Proprietaire;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class SaisieurController extends Controller
@@ -70,33 +79,94 @@ class SaisieurController extends Controller
     public function edit($id)
     {
         $etablissement = Etablissement::with('proprietaires')->find($id);
-        $proprietaire = $etablissement->proprietaires->first();
 
-    //    dd($etablissement);
+        $identification_stat = $etablissement->identification_stat;
+        $province_prop = Province::getProvinceProprietaire($id);
+        $region_prop = Region::getRegionProprietaire($id);
+        $district_prop = District::getDistrictProprietaire($id);
+        $commune_prop = Commune::getCommuneProprietaire($id);
+        $nationalite_prop = Nationalite::getNationaliteProp($id);
+        $fokontany_prop = Fokontany::getFokontanyProprietaire($id);
+        $region_etab = Region::getRegionEtablissement($id);
+        $district_etab = District::getDistrictEtablissement($id);
+        $commune_etab = Commune::getCommuneEtablissement($id);
+        $fokontany_etab = Fokontany::getFokontanyEtablissement($id);
+        
+        $section_etab = Section::getSectionEtab($id);
+        $division_etab = Division::getDivisionEtab($id);
+        $groupe_etab = Groupe::getGroupeEtab($id);
+        $classe_etab = Classe::getClasseEtab($id);
+        $categorie_etab = Categorie::getCategorieEtab($id);
+
+        $section_sec1 = Section::getSection1Etab($id);
+        $division_sec1 = Division::getDivision1Etab($id);
+        $groupe_sec1 = Groupe::getGroupe1Etab($id);
+        $classe_sec1 = Classe::getClasse1Etab($id);
+        $categorie_sec1 = Categorie::getCategorie1Etab($id);
+
+        $section_sec2 = Section::getSection2Etab($id);
+        $division_sec2 = Division::getDivision2Etab($id);
+        $groupe_sec2 = Groupe::getGroupe2Etab($id);
+        $classe_sec2 = Classe::getClasse2Etab($id);
+        $categorie_sec2 = Categorie::getCategorie2Etab($id);
+
+        
+        // dd($nationalite_prop->nationalite);
         $nationalite = Nationalite::All();
-        $fokontany= DB::table('fokontanies')->select('fokotany','id')->groupBy('fokotany')->get();
-        $activite_etab = Activite::All();
+        $provinces = Province::all();
+        $regions = Region::all();
+        $districts = District::all();
+        $communes = Commune::all();
+        // $fokontanis = Fokontany::All();
+        $sections = Section::all();
+
+        $district_users = District::getDistrictsUser();
+        $region_user = Region::getRegionsUser();
         $lchefs = Lchef::All();
         $juridiques = Juridique::All();
+        $code_region = DB::table('regions')
+            ->select('code_region')
+            ->where('id', '=', Auth()->user()->region_id)->first();
 
-        // dd($fokontany);
-        
-
-        $communes = DB::table('communes')
-            ->select('commune', 'id')
-            ->where('region', '=', Auth()->user()->region_user)
-            ->groupBy('commune')
-            ->get();
-    
         return view('saisisseur.modification.edit')
-            ->with('nationalites', $nationalite)
-            ->with('fokontanys', $fokontany)
-            ->with('activites', $activite_etab)
-            ->with('lchefs', $lchefs)
-            ->with('communes', $communes)
-            ->with('juridiques', $juridiques)
-            ->with('etablissement', $etablissement)
-            ->with('proprietaire', $proprietaire);
+        ->with('nationalites', $nationalite)
+        ->with('section_etab', $section_etab)
+        ->with('division_etab', $division_etab)
+        ->with('groupe_etab', $groupe_etab)
+        ->with('classe_etab', $classe_etab)
+        ->with('categorie_etab', $categorie_etab)
+        ->with('section_sec1', $section_sec1)
+        ->with('division_sec1', $division_sec1)
+        ->with('groupe_sec1', $groupe_sec1)
+        ->with('classe_sec1', $classe_sec1)
+        ->with('categorie_sec1', $categorie_sec1)
+        ->with('section_sec2', $section_sec2)
+        ->with('division_sec2', $division_sec2)
+        ->with('groupe_sec2', $groupe_sec2)
+        ->with('classe_sec2', $classe_sec2)
+        ->with('categorie_sec2', $categorie_sec2)
+        ->with('fokontany_etab', $fokontany_etab)
+        // ->with('fokontanis', $fokontanis)
+        ->with('regions', $regions)
+        ->with('districts', $districts) 
+        ->with('district_users', $district_users)
+        ->with('communes', $communes)
+        ->with('region_user', $region_user)
+        ->with('lchefs', $lchefs)
+        ->with('juridiques', $juridiques)
+        ->with('provinces', $provinces)
+        ->with('province_prop', $province_prop)
+        ->with('region_prop', $region_prop)
+        ->with('region_etab', $region_etab)
+        ->with('district_prop', $district_prop)
+        ->with('district_etab', $district_etab)
+        ->with('commune_prop', $commune_prop)
+        ->with('commune_etab', $commune_etab)
+        ->with('fokontany_prop', $fokontany_prop)
+        ->with('nationalite_prop', $nationalite_prop)
+        ->with('etablissement', $etablissement)
+        ->with('identification_stat', $identification_stat)
+        ->with('sections', $sections);
     }
 
     /**
@@ -110,11 +180,11 @@ class SaisieurController extends Controller
     {
         $validator = Validator::make($request->all(), [
             
-            'adresse' => 'required',
-            'lien' => 'required',
-            'num_tel' => 'required',
             'sigle' => 'required',
             'adresse_etab' => 'required',
+            'district_etab' => 'required',
+            'commune_etab' => 'required',
+            'fokontany_etab' => 'required',
             'fond' => 'required',
             'tel_etab' => 'required',
             'num_patente' => 'required',
@@ -123,51 +193,74 @@ class SaisieurController extends Controller
             'malagasy_f' => 'required',
             'etranger_m' => 'required',
             'etranger_f' => 'required',
-            'fokotany_etab' => 'required|exists:fokontanies,id',
-            'fonkotany_id' => 'required|exists:fokontanies,id',
-            'lchef_etab' => 'required|exists:lchefs,id',
-            'activite_etab' => 'required|exists:activites,id',
-            'juridique_etab' => 'required|exists:juridiques,id',
-
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
         
         $etablissement = Etablissement::findOrFail($id);
-        $etablissement->fokontany_id = $request->input('fokotany_etab');
+        $proprietaire = $etablissement->proprietaires;
+       
+        $categorie = Categorie::findOrFail($request->input('categorie_0'));
+        $province_etab = Region::findOrFail($request->input('region_etab'));
+        
+        
+        $etablissement->user_id = Auth::user()->id;
+       // $etablissement->identification_stat = $request->input('identification_stat');
         $etablissement->sigle = $request->input('sigle');
         $etablissement->adresse_etab = $request->input('adresse_etab');
+
+        $etablissement->province_id = $province_etab->province_id;
+
+        $etablissement->region_id = $request->input('region_etab');
+        $etablissement->district_id = $request->input('district_etab');
+        $etablissement->commune_id = $request->input('commune_etab');
+        $etablissement->fokontany_id = $request->input('fokontany_etab');
+        $etablissement->lchef_id = $request->input('lchef_id');
+        $etablissement->juridique_id = $request->input('juridique_id');
         $etablissement->fond = $request->input('fond');
-        $etablissement->comptabilite = $request->input('comptabilite');
-        $etablissement->duplicata = $request->input('duplicata');
-        $etablissement->type = 'M';
-        $etablissement->juridique_id = $request->input('juridique_etab');
-        $etablissement->lchef_id = $request->input('lchef_etab');
-        $etablissement->activite_id = $request->input('activite_etab');
-        $etablissement->activite_sec1 = $request->input('activite_sec1');
-        $etablissement->activite_sec2 = $request->input('activite_sec2'); 
         $etablissement->tel_etab = $request->input('tel_etab');
         $etablissement->num_patente = $request->input('num_patente');
         $etablissement->bp = $request->input('bp');
-        $etablissement->malagasy_f = $request->input('malagasy_f');
+        $etablissement->comptabilite = $request->input('comptabilite');
+        $etablissement->duplicata = $request->input('duplicata');
+        $etablissement->type = 'M';
+        $etablissement->activite_princ = $request->input('activite_0');
+        $etablissement->section_id = $request->input('section_0');
+        $etablissement->division_id = $request->input('division_0');
+        $etablissement->groupe_id = $request->input('groupe_0');
+        $etablissement->classe_id = $request->input('classe_0');
+        $etablissement->categorie_id = $request->input('categorie_0');
+        $etablissement->activite_sec1 = $request->input('activite_1');
+        $etablissement->section_sec1 = $request->input('section_1');
+        $etablissement->division_sec1 = $request->input('division_1');
+        $etablissement->groupe_sec1 = $request->input('groupe_1');
+        $etablissement->classe_sec1 = $request->input('classe_1');
+        $etablissement->categorie_sec1 = $request->input('categorie_1');
+        $etablissement->activite_sec2 = $request->input('activite_2');
+        $etablissement->section_sec2 = $request->input('section_2');
+        $etablissement->division_sec2 = $request->input('division_2');
+        $etablissement->groupe_sec2 = $request->input('groupe_2');
+        $etablissement->classe_sec2 = $request->input('classe_2');
+        $etablissement->categorie_sec2 = $request->input('categorie_2');
         $etablissement->malagasy_m = $request->input('malagasy_m');
+        $etablissement->malagasy_f = $request->input('malagasy_f');
         $etablissement->etranger_m = $request->input('etranger_m');
         $etablissement->etranger_f = $request->input('etranger_f');
-        $etablissement->user_id = Auth()->user()->id;
-        $etablissement->status = 'En attente';
-        $etablissement->save();
+        $etablissement->status = "En attente";
+
+
+        $etablissement->num_entreprise =$categorie->code_categorie."-".$etablissement->identification_stat;
+
         
-        $proprietaire = $etablissement->proprietaires->first();
 
-        $proprietaire->fokontany_id = $request->input('fonkotany_id');
-        $proprietaire->adresse = $request->input('adresse');
-        $proprietaire->email = $request->input('email');
-        $proprietaire->lien = $request->input('lien');
-        $proprietaire->num_tel = $request->input('num_tel');
-        $proprietaire->save();
 
-        $etablissement->proprietaires()->attach($proprietaire->id);
+
+       
+        // $proprietaire->lien = (int)$proprietaire->lien + 1;
+        $etablissement->save();
+        //$proprietaire->save();
+        //$etablissement->proprietaires()->attach($proprietaire->id);
        return redirect()->route('saisie.index')->with('success', 'Données envoyées avec succès !!!');
     }
    
