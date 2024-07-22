@@ -11,7 +11,9 @@
                     <div class="card-block p-0">
                       <div class="tab-content card-block">
                       <div class="header" style="padding-bottom: 3%">
-                          <h4 class="title" style="text-align: center">A propos du Propriétaire :</h4><hr/>
+                        <hr>
+                          <h4 class="title" style="text-align: center;
+                                                    ">Propriétaire </h4><hr/>
                           @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -43,28 +45,13 @@
                               <br/><hr/>
                              
                               <div class="header" style="padding-bottom: 3%">
-                                <h4 class="title" style="text-align: center">A propos de l'Etablissement</h4><hr/>
+                                <h4 class="title" style="text-align: center;
+                                                        
+                                                        color:black">Etablissement</h4><hr/>
                           </div>
                           <input type="hidden" class="form-control form-control-bold form-control-center" name="num_entreprise"  id="num_entreprise">
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Identification :</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-bold form-control-center" value="{{$identification_stat}}" name="identification_stat" id="identification_stat" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Sigle : <span style="color: red">*</span></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Sigle" name="sigle" value="{{ old('sigle') }}" id="sigle">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse de l'etablissement" name="adresse_etab" value="{{ old('adresse_etab') }}" id="adresse_etab">
-                            </div>
-                        </div>
-                        <div class="form-group row">
+
+                          <div class="form-group row">
                             <div class="col-sm-4">
                                 <label class="">Région :</label>
                                 <select class="form-control" readonly name="region_etab" id="region_etab">
@@ -91,19 +78,47 @@
                             </div>
 
                         </div>
+
+                        <br>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Identification :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-bold form-control-center" value="{{$identification_stat}}" name="identification_stat" id="identification_stat" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Sigle : <span style="color: red">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Sigle" name="sigle" value="{{ old('sigle') }}" id="sigle">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse de l'etablissement" name="adresse_etab" value="{{ old('adresse_etab') }}" id="adresse_etab">
+                            </div>
+                        </div>
+                        
+
+                        
                         <div class="form-group row">
                             <label class="">  </label>
-                            <label class="col-sm-2 col-form-label">Fond (en 1000 Ar): <span style="color: red">*</span></label>
+                            <label class="col-sm-2 col-form-label" style="padding:18px">Fond (en 1000 Ar): <span style="color: red">*</span></label>
                             <div class="col-sm-10">
                                 <label class=""></label>
                                 <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "25" name="fond" value="{{ old('fond') }}" id="fond" placeholder="Fond"/>
                             </div>
                         </div>
+
+                        <br>
+
                         <div class="form-group row">
                             <div class="col-sm-2">
                                 <label class=""></label>
                                 <input type="hidden" />
                             </div>
+                            
                             <div class="col">
                                 <label class="">Numéro Tel Etablissement : <span style="color: red">*</span></label>
                                 <input type="text" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10" name="tel_etab"  value="{{ old('tel_etab') }}" id="tel_etab" placeholder="Telephone établissement"/>
@@ -151,15 +166,83 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                              <label class="col-sm-2 col-form-label">Activité Principal : <span style="color: red">*</span></label>
-                              <div class="col-sm-10">
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité Principal " name="activite_0" id="activite_0">
-                                </div>
-                              </div>
+                        
+
+
+<br>
+<br>
+                       
+                        <div class="mb-3 row"><h4 style="color:grey;
+                                                        
+                                                        
+                                                        padding-bottom: 5px;
+                                                        padding-top: 5px
+                                                        ">ACTIVITE PRINCIPAL</h4></div>
+                        <div class="mb-3 row">
+                        <label  class="col-sm-2 col-form-label">Activité Principal : <span style="color: red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité Principal " name="activite_0" id="activite_0">
+                            </div>
                         </div>
-                        <div class="form-group row">
+
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Section:</label>
+                            <div class="col-sm-10">
+                                
+                                <select style="background-color:grey;" class="form-control"  name="section_0" id="section_0">
+                                    <option  value="">Sélectionner une section</option>
+                                    @foreach ($sections as $section)
+                                        <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
+                                    @endforeach
+                                </select>
+                                </input>
+                            </div>
+                        </div>  
+<br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Division:</label>
+                            <div class="col-sm-10">
+                                
+                                <select class="form-control"  name="division_0" id="division_0">
+                                </select>
+                                </input>
+                            </div>
+                        </div>  
+
+                        <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Groupe:</label>
+                            <div class="col-sm-10">
+                                
+                                <select class="form-control"  name="groupe_0" id="groupe_0">
+                                </select>
+                                </input>
+                            </div>
+                        </div>  
+
+                        <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Classe:</label>
+                            <div class="col-sm-10">
+                                
+                                <select class="form-control"  name="classe_0" id="classe_0">
+                                </select>
+                                </input>
+                            </div>
+                        </div>  
+
+                        <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Catégorie:</label>
+                            <div class="col-sm-10">
+                                
+                                <select class="form-control"  name="categorie_0" id="categorie_0">
+                                </select>
+                                </input>
+                            </div>
+                        </div> 
+                        
+                        <!--div class="form-group row">
                             <div class="col">
                                 <label class="">Section:</label>
                                 <select class="form-control"  name="section_0" id="section_0">
@@ -189,19 +272,88 @@
                                 <select class="form-control" name="categorie_0" id="categorie_0">
                                 </select>
                             </div>
-                        </div>
+                        </div-->
+
+                        
+                        
                         <div class="form-group row">
                             <hr>
                         </div>
+                        <div class="mb-3 row"><h4 style="color:grey;
+                                                        
+                                                        
+                                                        padding-bottom: 5px;
+                                                        padding-top: 10px
+                                                        ">ACTIVITE SECONDAIRE I</h4></div>
+
                         <div class="form-group row">
-                              <label class="col-sm-2 col-form-label">Activité Secondaire1 :</label>
-                              <div class="col-sm-10">
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire1 " name="activite_1" id="activite_1">
-                                </div>
-                              </div>
                         </div>
-                        <div class="form-group row">
+
+                        
+                        <div class="mb-3 row">
+                            <label  class="col-sm-2 col-form-label">Activité Secondaire 1 :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire 1 " name="activite_1" id="activite_1">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Section:</label>
+                            <div class="col-sm-10">
+                                
+                                <select style="background-color:grey;" class="form-control"  name="section_1" id="section_1">
+                                    <option  value="">Sélectionner une section</option>
+                                    @foreach ($sections as $section)
+                                        <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
+                                    @endforeach
+                                </select>
+                                </input>
+                            </div>
+                        </div>  <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Division:</label>
+                            <div class="col-sm-10">
+                                
+                            <select class="form-control" name="division_1" id="division_1">
+                            </select>
+                                </input>
+                            </div>
+                        </div>  
+                        <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Groupe:</label>
+                            <div class="col-sm-10">
+                                
+                            <select class="form-control" name="groupe_1" id="groupe_1">
+                            </select>
+                                </input>
+                            </div>
+                        </div>  <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Classe:</label>
+                            <div class="col-sm-10">
+                                
+                            <select class="form-control" name="classe_1" id="classe_1">
+                            </select>
+                                </input>
+                            </div>
+                        </div>  
+                        <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Categorie:</label>
+                            <div class="col-sm-10">
+                                
+                            <select class="form-control" name="categorie_1" id="categorie_1">
+                            </select>
+                                </input>
+                            </div>
+                        </div>  
+
+
+
+
+
+                        <!--div class="form-group row">
                             <div class="col">
                                 <label class="">Section:</label>
                                 <select class="form-control"  name="section_1" id="section_1">
@@ -233,19 +385,87 @@
                             </div>
 
 
-                        </div>
+                        </div-->
+
+
+
+
                         <div class="form-group row">
                             <hr>
                         </div>
+                        <div class="mb-3 row"><h4 style="color:grey;
+                            
+                            
+                            padding-bottom: 5px;
+                            padding-top: 10px
+                            ">ACTIVITE SECONDAIRE II</h4></div>
+
                         <div class="form-group row">
-                              <label class="col-sm-2 col-form-label">Activité Secondaire2 :</label>
-                              <div class="col-sm-10">
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire2" name="activite_2"  id="activite_2">
-                                </div>
-                              </div>
                         </div>
-                        <div class="form-group row">
+
+
+                        <div class="mb-3 row">
+                            <label  class="col-sm-2 col-form-label">Activité Secondaire 2 :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire 2 " name="activite_2" id="activite_2">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Section:</label>
+                            <div class="col-sm-10">
+                                
+                                <select style="background-color:grey;" class="form-control"  name="section_2" id="section_2">
+                                    <option  value="">Sélectionner une section</option>
+                                    @foreach ($sections as $section)
+                                        <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
+                                    @endforeach
+                                </select>
+                                </input>
+                            </div>
+                        </div>  <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Division:</label>
+                            <div class="col-sm-10">
+                            <select class="form-control" name="division_2" id="division_2">
+                                </select>
+                                
+                                </input>
+                            </div>
+                        </div>  <br>
+                        
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Groupe:</label>
+                            <div class="col-sm-10">
+                            <select class="form-control" name="groupe_2" id="groupe_2">
+                                </select>
+                                
+                                </input>
+                            </div>
+                        </div>  <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Classe:</label>
+                            <div class="col-sm-10">
+                            <select class="form-control" name="classe_2" id="classe_2">
+                                </select>
+                                
+                                </input>
+                            </div>
+                        </div>  <br>
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Catégorie:</label>
+                            <div class="col-sm-10">
+                            <select class="form-control" name="categorie_2" id="categorie_2">
+                                </select>
+                                
+                                </input>
+                            </div>
+                        </div> 
+                        
+                        
+                        
+
+                        <!--div class="form-group row">
                             <div class="col">
                                 <label class="">Section:</label>
                                 <select class="form-control"  name="section_2" id="section_2">
@@ -276,7 +496,7 @@
                                 </select>
                             </div>
 
-                        </div>
+                        </div-->
                         <div class="form-group row">
                             <hr>
                         </div>
@@ -307,7 +527,7 @@
                         <div class="form-group row">
                             <div class="col-sm-2">
                                 <label class=""></label>
-                                <label class="">Salariés Malagasy : <span style="color: red">*</span></label>
+                                <label class="" style="padding-top: 25px">Salariés Malagasy : <span style="color: red">*</span></label>
                             </div>
                             <div class="col">
                                 <label class=""></label>
@@ -330,27 +550,24 @@
                             </div>
                         </div>
 
-
-
-                                <br/>
-                              <div class="form-group row">
-                                  <label class="col-sm-2 col-form-label"></label>
-                                  <div class="col-sm-10" >
-                                      {{-- {{Form::submit('Envoyer', ['class' => 'btn btn-outline-primary', 'id' => 'ajout_proprietaire_exist'])}}  --}}
-                                      <button type="submit" class="btn btn-outline-primary">Ajouter </button>
-                                  </div>
+                            <br/>
+                          <div class="form-group row">
+                              <label class="col-sm-2 col-form-label"></label>
+                              <div class="col-sm-10" >
+                                  <button type="submit" class="btn btn-outline-primary"> Ajouter</button>
                               </div>
-                        </form>
+                          </div>
                           
-                       </div> 
-                    </div>
+                    </form>
+
+                   </div>
                 </div>
             </div>
-              <!-- tabs card end -->
+        </div>
 
-   
+
 @endsection
 
 @section('script')
-      
+
 @endsection

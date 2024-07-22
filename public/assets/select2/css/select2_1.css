@@ -146,8 +146,7 @@
     margin-right: 20px;
     padding-right: 0px; }
   .select2-container--default .select2-selection--single .select2-selection__placeholder {
-    color: #999; 
-  }
+    color: #999; }
   .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 26px;
     position: absolute;
@@ -514,5 +513,3 @@
 
 .select2-container--classic.select2-container--open .select2-dropdown {
   border-color: #5897fb; }
-
-

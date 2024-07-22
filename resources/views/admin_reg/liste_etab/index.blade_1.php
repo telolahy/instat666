@@ -31,8 +31,8 @@ List Commune
       @endif
           <form class="form-inline" method="GET"   action="{{route('search_list')}}">
               @csrf
-            <input class="form-control mr-sm-2" name="search" type="text" placeholder="Rechercher">
-            <button class="btn btn-success"  type="submit" style="background-color: orange; border: 0">Rechercher</button>
+            <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search">
+            <button class="btn btn-success"  type="submit">Search</button>
           </form>
         </div>
 
@@ -64,15 +64,9 @@ List Commune
                     @endif
                   </td>
                   <td>
-                    <!--<a href="{{route('reg_etab.show',$etablissement->id)}}" data-toggle="tooltip" title="Afficher plus" class="modifier" id="">
-                      <h6><i class="ti ti-plus" style="color: #1e7e34"></i></h6>
-                    </a><br />-->
-
-<!-- modification -->
                     <a href="{{route('reg_etab.show',$etablissement->id)}}" data-toggle="tooltip" title="Afficher plus" class="modifier" id="">
-                      <button class="btn btn-secondary" style="color: #ccc59">Voir</button>
-                    </a>
-<!-- fin de la modification -->
+                      <h6><i class="ti ti-plus" style="color: #1e7e34"></i></h6>
+                    </a><br />
                   </td>
                 </tr>
                 @endforeach
