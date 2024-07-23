@@ -13,7 +13,7 @@
                       <div class="header" style="padding-bottom: 3%">
                         <hr>
                           <h4 class="title" style="text-align: center;
-                                                   font-size:30px;
+                                                   
                                                    color:black ">Propriétaire </h4><hr/>
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -152,7 +152,7 @@
                               <br/><hr/>
                               <div class="header" style="padding-bottom: 3%">
                                     <h4 class="title" style="text-align: center;
-                                                            font-size:30px;
+                                                            
                                                             color:black">Etablissement</h4><hr/>
                               </div>
                               <input type="hidden" class="form-control form-control-bold form-control-center" name="num_entreprise"  id="num_entreprise">
@@ -278,12 +278,11 @@
 <br>
 <br>
                            
-                            <div class="mb-3 row"><h1 style="color:grey;
-                                                            font-size:25px;
+                            <div class="mb-3 row"><h4 style="color:grey;
                                                             
                                                             padding-bottom: 5px;
                                                             padding-top: 5px
-                                                            ">ACTIVITE PRINCIPAL</h1></div>
+                                                            ">ACTIVITE PRINCIPAL</h4></div>
                             <div class="mb-3 row">
                             <label  class="col-sm-2 col-form-label">Activité Principal : <span style="color: red">*</span></label>
                             <div class="col-sm-10">
@@ -385,12 +384,12 @@
                             <div class="form-group row">
                                 <hr>
                             </div>
-                            <div class="mb-3 row"><h1 style="color:grey;
+                            <div class="mb-3 row"><h4 style="color:grey;
                                                             font-size:25px;
                                                             
                                                             padding-bottom: 5px;
                                                             padding-top: 10px
-                                                            ">ACTIVITE SECONDAIRE I</h1></div>
+                                                            ">ACTIVITE SECONDAIRE I</h4></div>
 
                             <div class="form-group row">
                             </div>
@@ -499,12 +498,12 @@
                             <div class="form-group row">
                                 <hr>
                             </div>
-                            <div class="mb-3 row"><h1 style="color:grey;
+                            <div class="mb-3 row"><h4 style="color:grey;
                                 font-size:25px;
                                 
                                 padding-bottom: 5px;
                                 padding-top: 10px
-                                ">ACTIVITE SECONDAIRE II</h1></div>
+                                ">ACTIVITE SECONDAIRE II</h4></div>
 
                             <div class="form-group row">
                             </div>
