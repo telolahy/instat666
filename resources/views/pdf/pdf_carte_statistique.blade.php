@@ -178,6 +178,7 @@
                 font-style: italic;
                 font-weight: bold;
                 margin-left: 1%;
+                 
             }
             .div_nom {
                 width: 98.5%;
@@ -185,13 +186,15 @@
                 border-style: solid;
                 border-width: 0.5px;
                 margin-left: 0.5%;
-                margin-top: 0%
+               
+              
             }
             .nom {
                 font-weight: bold;
                 margin-left: 1%;
                 font-size: 20px;
-                margin-top: 0.1%; 
+                margin-top: -0.2%; 
+                
             }
             .div_activite {
                 width: 98.5%;
@@ -200,6 +203,8 @@
                 border-width: 0.5px;
                 margin-left: 0.5%;
                 margin-top: 0.5%;
+            
+                
             }
             .activite_val {
                 font-size: 15px;
@@ -208,6 +213,7 @@
                 border-width: 0px;
                 padding-top: 0%;
                 margin-top: 0%;
+                  
             }
 
             .direction {
@@ -218,6 +224,7 @@
                 display: inline-block;
                 margin-left: 0.5%;
                 margin-top: 4.7%;
+                
             }
             .QRimage{
                 width: 15%;
@@ -227,6 +234,7 @@
                 display: inline-block;
                 margin-left: 0.5%;
                 margin-top: 4.7%;
+                
             }
             .qrcode{
                 width: 70%;
@@ -244,6 +252,7 @@
                 border-width: 0.5px;
                 display: inline-block;
                 margin-top: 0.1%;
+                
             }
             .p1 {
                 font-size: 12px;
@@ -251,6 +260,7 @@
                 border-width: 0px;
                 margin-top: 2%;
                 font-style: italic;
+                
             }
             .p2 {
                 padding-top: 3%;
@@ -260,6 +270,7 @@
                 margin-top: 2%;
                 font-style: italic;
                 font-weight: bold;
+                
             }
             .p3 {
                 padding-top: 3%;
@@ -269,6 +280,7 @@
                 margin-top: 1%;
                 font-style: italic;
                 font-weight: bold;
+                
             }
 
         </style>
@@ -318,7 +330,7 @@
             </div>
         </div>
         <div class="card2">   
-            <div class="row">
+            {{-- <div class="row"> --}}
                 <div class="col-2">
                     <div class="nomena">
                         <p class="label">Nomena tamin'ny (Délivré le) :</p>
@@ -329,38 +341,42 @@
                         <p class="date">{{ \Carbon\Carbon::now()->addYears(2)->format('d/m/Y') }}</p>
                     </div>
                 </div> 
-            </div>
-            <p class="input"> Anarana(Nom/Dénomination) :</p>
-            <div class="div_nom"><p class="nom">{{$etablissement->proprietaires->first()->nom}}</p></div>
-            <p class="input"> Anarana nahafehezina (Sigle) :</p>
-            <div class="div_nom"><p class="nom">{{$etablissement->sigle}}</p></div>
-            <p class="input"> Adiresy (Adresse) :</p>
-            @if ($etablissement->adresse_etab == $etablissement->proprietaires->first()->adresse)
-                 <div class="div_nom"><p class="nom">{{$etablissement->adresse_etab}} {{$etablissement->fokontany->fokotany}}</p></div>
-            @else
-                 <div class="div_nom"><p class="nom">{{$etablissement->adresse_etab}} {{$etablissement->fokontany->fokotany}} / {{$etablissement->proprietaires->first()->adresse}}</p></div>
-            @endif
-            <p class="input"> Asa atao (Activité principale) | Asa fanampiny (Activité secondaire) :</p>
-            <div class="div_activite">
-                <p class="activite_val">
-                    @if ($activite_desc1 == "Néant")
-                        -{{$activite_desc}}<br>
-                    @elseif($activite_desc2 == "Néant")
-                        -{{$activite_desc}}<br>-{{$activite_desc1}}
+            {{-- </div> --}}
+            
+            <div class="">
+                <p class="input"> Anarana(Nom/Dénomination) :</p>
+                    <div class="div_nom"><p class="nom">{{$etablissement->proprietaires->first()->nom}}</p></div>
+                    <p class="input"> Anarana nahafehezina (Sigle) :</p>
+                    <div class="div_nom"><p class="nom">{{$etablissement->sigle}}</p></div>
+                    <p class="input"> Adiresy (Adresse) :</p>
+                    @if ($etablissement->adresse_etab == $etablissement->proprietaires->first()->adresse)
+                        <div class="div_nom"><p class="nom">{{$etablissement->adresse_etab}} {{$etablissement->fokontany->fokotany}}</p></div>
                     @else
-                        -{{$activite_desc}}<br>-{{$activite_desc1}}<br>-{{$activite_desc2}}
-                    @endif  
-                                 
-                </p>
+                        <div class="div_nom"><p class="nom">{{$etablissement->adresse_etab}} {{$etablissement->fokontany->fokotany}} / {{$etablissement->proprietaires->first()->adresse}}</p></div>
+                    @endif
+                    <p class="input"> Asa atao (Activité principale) | Asa fanampiny (Activité secondaire) :</p>
+                    <div class="div_activite">
+                        <p class="activite_val">
+                            @if ($activite_desc1 == "Néant")
+                                -{{$activite_desc}}<br>
+                            @elseif($activite_desc2 == "Néant")
+                                -{{$activite_desc}}<br>-{{$activite_desc1}}
+                            @else
+                                -{{$activite_desc}}<br>-{{$activite_desc1}}<br>-{{$activite_desc2}}
+                            @endif  
+                                        
+                        </p>
+                    </div>
+                    <div class="QRimage"> <img class="qrcode" src="{!! $qrcodeBase64 !!}" alt="QRCODE" /></div>
+                    <div class="direction">
+                        <p class="p1">DIRECTION INTERREGIONALE <br>D'ANTANANARIVO</p>
+                        <p class="p2">TSY EKENA NY TAKOSONA <br>(AUCUNE RATURE NI GOMMAGE)</p>
+                    </div>
+                    <div class="responsable">
+                        <p class="p3">Sonian'ny tompon'andraikitra <br>(Signature du Responsable)</p>
+                    </div>
+                </div>
+
             </div>
-            <div class="QRimage"> <img class="qrcode" src="{!! $qrcodeBase64 !!}" alt="QRCODE" /></div>
-            <div class="direction">
-                <p class="p1">DIRECTION INTERREGIONALE <br>D'ANTANANARIVO</p>
-                <p class="p2">TSY EKENA NY TAKOSONA <br>(AUCUNE RATURE NI GOMMAGE)</p>
-            </div>
-            <div class="responsable">
-                <p class="p3">Sonian'ny tompon'andraikitra <br>(Signature du Responsable)</p>
-            </div>
-        </div>
     </body>
 </html>
