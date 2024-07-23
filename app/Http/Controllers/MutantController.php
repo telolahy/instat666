@@ -142,7 +142,7 @@ class MutantController extends Controller
         $etablissement->type = "U";
         $etablissement->save();
         $etablissement->proprietaires()->attach($proprietaire->id);
-        dd($etablissement);
+       // dd($etablissement);
         return redirect()->route('mutation.index')->with('success', 'Données envoyées avec succès !!!');
 
        

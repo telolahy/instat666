@@ -34,7 +34,7 @@ Ajouter Etabissement
                                         <td><img src="assets/images/auth/{{$user->image}}" alt="" width="50px" height="50px" style="border: 50%;"></td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
-                                        <td>{{$user->region_user}}</td>
+                                        <td>{{ $user->region->region }}</td>
                                         @if ($user->role == "admin_par_region")
                                             <td>Administrateur <br> par région</td>  
                                         @elseif($user->role == "super_admin")
