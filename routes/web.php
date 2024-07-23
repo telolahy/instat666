@@ -39,7 +39,14 @@ use App\Http\Controllers\AjoutSaisisseurExistantController;
 use App\Http\Controllers\AdminRegMutationExistantController;
 
 Route::get('/', function () {
-    return view('home/home');
+    if(Auth::check())
+    {
+        return redirect()->route('home');
+    }
+    else
+    {
+        return view('home/home');
+    }
 });
 
 
@@ -154,8 +161,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/form_user', [UserController::class, 'affiche_form_user']);
-    Route::post('/ajout_user', [UserController::class, 'ajout_user']);
-    Route::get('/list_user', [UserController::class, 'list_user']);
+    Route::post('/ajout_user', [UserController::class, 'ajout_user'])->name('ajout_user');
+    Route::get('/list_user', [UserController::class, 'list_user'])->name('list_user');
     Route::delete('/supprimer_user/{id}', [UserController::class, 'supprimer_user']);
     Route::get('/form_edit_user/{id}', [UserController::class, 'affiche_form_edit_user']);
     Route::post('/modifier_user', [UserController::class, 'modifier_user']);

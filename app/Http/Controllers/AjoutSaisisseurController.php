@@ -35,6 +35,10 @@ class AjoutSaisisseurController extends Controller
                     ->get();
         return view('admin_reg.ajout_etab.search_index')->with('communes', $communes);
     }
+    public function index()
+    {
+    
+    }
 
     /**
      * Display a listing of the resource.

@@ -15,12 +15,13 @@ class UserController extends Controller
     public function affiche_form_user()
     {
         if (Auth()->user()->role == "admin_par_region") {
-            $communes = DB::table('communes')->select('region')
-                ->where('region', '=', Auth()->user()->region_user)->distinct()->get();
+            $communes = User::where('region_id', Auth()->user()->region_id)->get();
+            $regions = Region::all();
         } else {
             $communes = DB::table('communes')->select('region')->distinct()->get();
         }
-        return view('user.ajout_user')->with('communes', $communes);
+
+        return view('user.ajout_user', ['communes' => $communes, 'regions' => $regions]);
     }
 
     public function ajout_user(Request $request)
@@ -77,24 +78,21 @@ class UserController extends Controller
 
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->region_user = $request->input('region_user');
+            $user->region_id = $request->input('region_id');
             $user->role = $request->input('role');
             $user->image = $filePath;
             $user->password = bcrypt($request->input('password'));
             $user->save();
-            return response()->json([
-                'status' => 200,
-                'message' => " Utilisateur ajouté avec succèss !!!",
-            ]);
+            return redirect()->route('list_user')->with('message', 'Données envoyées avec succès !!!');
         }
     }
 
     public function list_user()
     {
-        if (Auth()->user()->role == "admin_par_region") {
-            $users = User::where('region_id', Auth()->user()->region_id)->get();
+        if (Auth::user()->role == "admin_par_region") {
+            $users = User::with('region')->where('region_id', Auth::user()->region_id)->get();
         } else {
-            $users = User::all();
+            $users = User::with('region')->get();
         }
 
         return view('user.list_user')->with('users', $users);
@@ -112,12 +110,12 @@ class UserController extends Controller
 
     public function affiche_form_edit_user($id)
     {
-        $user = User::find($id);
-        $region_User=Region::getRegionsUser($id);
+        // $user = User::find($id);
+        // $region_User=Region::getRegionsUser($id);
         
-        return view('user.edit_user')
-               ->with('user', $user);
-               ->with('region_User', $region_User);
+        // return view('user.edit_user')
+        //        ->with('user', $user);
+        //        ->with('region_User', $region_User);
     }
 
     public function modifier_user(Request $request)

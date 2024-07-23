@@ -129,8 +129,10 @@ class MutantExistController extends Controller
         {
             return redirect()->back();
         }
-        $new_proprietaires = Proprietaire::with('etablissements')->where('cin', 'like', "%$request->search_existant%")
+        $new_proprietaires = Proprietaire::with('etablissements')
+                            ->where('cin', 'like', "%$request->search_existant%")
                             ->orWhere('nom', 'like', "%$request->search_existant%")->get();
+      //  dd($etablissement);
         return view('saisisseur.mutation_existant.edit_existant')->with('etablissement', $etablissement)->with('new_proprietaires',$new_proprietaires);
     }
     /**
