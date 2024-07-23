@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ExcelController;
 
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\LchefController;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\MutantController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\QRcodeGenerateController;
 use App\Http\Controllers\Admin_reg_AjoutController;
 use App\Http\Controllers\AjoutSaisisseurController;
 use App\Http\Controllers\Admin_reg_MutationController;
+use App\Http\Controllers\ReenregistrementRegController;
 use App\Http\Controllers\AjoutAdminRegExistantController;
 use App\Http\Controllers\Admin_reg_modificationController;
 use App\Http\Controllers\Admin_reg_EtablissementController;
@@ -241,6 +243,9 @@ Route::middleware(['auth'])->group(function () {
     //modification
     Route::resource('reg_modification', Admin_reg_modificationController::class);
 
+    //Reenregistrement ReenregistrementReg_1Controller
+    Route::resource('reg_enregistrement', ReenregistrementRegController::class);
+    
     //mutation
     Route::resource('reg_mutation', Admin_reg_MutationController::class);
     Route::post('mutation_ft_admin_reg/{etab_id}/{prop_id}',[Admin_reg_MutationController::class, 'mutation_ft'])->name('mutation_ft_admin_reg');
