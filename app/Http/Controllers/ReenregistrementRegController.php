@@ -24,7 +24,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class Admin_reg_modificationController extends Controller
+class ReenregistrementRegController extends Controller
 {
     /** 
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class Admin_reg_modificationController extends Controller
     {
         $etablissements = Etablissement::where('status','!=','En attente')->with('proprietaires')->get();
         // dd($etablissements);
-        return view('admin_reg.modification.index')->with('etablissements', $etablissements);
+        return view('admin_reg.enregistrement.index')->with('etablissements', $etablissements);
     }
 
     /**
@@ -128,28 +128,7 @@ class Admin_reg_modificationController extends Controller
         $code_region = DB::table('regions')
             ->select('code_region')
             ->where('id', '=', Auth()->user()->region_id)->first();
-
-      
-
-        // $dernier_ligne = Etablissement::orderBy('created_at', 'DESC')->first();
-
-        // $today = Carbon::now();
-        // $today_year = $today->year;
-
-        // if ($dernier_ligne != null) {
-        //     if ($today_year > $dernier_ligne->created_at->year) {
-
-        //         $num_sequenciel = "00000";
-        //     } else {
-
-        //         $num_sequenciel = str_pad($dernier_ligne->id, 5, "0", STR_PAD_LEFT);
-        //     }
-        // } else {
-        //     $num_sequenciel = "00000";
-        // }
-
-       // $identification_stat = $code_region->code_region . "-" . $today_year . "-" . $num_sequenciel;
-        return view('admin_reg.modification.edit')
+        return view('admin_reg.enregistrement.edit')
             ->with('nationalites', $nationalite)
             ->with('section_etab', $section_etab)
             ->with('division_etab', $division_etab)
@@ -167,7 +146,6 @@ class Admin_reg_modificationController extends Controller
             ->with('classe_sec2', $classe_sec2)
             ->with('categorie_sec2', $categorie_sec2)
             ->with('fokontany_etab', $fokontany_etab)
-            // ->with('fokontanis', $fokontanis)
             ->with('regions', $regions)
             ->with('districts', $districts) 
             ->with('district_users', $district_users)
@@ -245,7 +223,7 @@ class Admin_reg_modificationController extends Controller
         $etablissement->bp = $request->input('bp');
         $etablissement->comptabilite = $request->input('comptabilite');
         $etablissement->duplicata = $request->input('duplicata');
-        $etablissement->type = 'M';
+        $etablissement->type = 'Re';
         $etablissement->activite_princ = $request->input('activite_0');
         $etablissement->section_id = $request->input('section_0');
         $etablissement->division_id = $request->input('division_0');
