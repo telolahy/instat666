@@ -36,9 +36,12 @@ use App\Http\Controllers\Admin_reg_MutationController;
 use App\Http\Controllers\ReenregistrementRegController;
 use App\Http\Controllers\AjoutAdminRegExistantController;
 use App\Http\Controllers\Admin_reg_modificationController;
+use App\Http\Controllers\ReenregistrementSaisieController;
 use App\Http\Controllers\Admin_reg_EtablissementController;
 use App\Http\Controllers\AjoutSaisisseurExistantController;
 use App\Http\Controllers\AdminRegMutationExistantController;
+use App\Http\Controllers\saisie_EtablissementController;
+
 
 Route::get('/', function () {
     if(Auth::check())
@@ -192,6 +195,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('mutation_existant', MutantExistController::class);
     Route::get('/mutation_prop_existant/{etab_id}/{new_prop_id}', [MutantExistController::class, 'mutation_existant'])->name('mutation_prop_existant');
     Route::get('/search_existant/{id}', [MutantExistController::class, 'ft_search'])->name('search_existant');
+
+     //Reenregistrement
+     Route::resource('saisie_enregistrement', ReenregistrementSaisieController::class);
+    //  etablissement
+     Route::resource('saisie_etab', saisie_EtablissementController::class);
+     Route::get('/search_list_saisie', [saisie_EtablissementController::class, 'ft_search'])->name('search_list_saisie');
     
     
     
