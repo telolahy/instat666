@@ -203,7 +203,7 @@
                                             <ul class="pcoded-submenu">
                                             <li class="{{(request()->is('list_etablissement')? 'active' : '')}}">
                                                 {{-- <a href={{URL::to('/list_etablissement')}}> --}}
-                                                <a href="{{route('reg_etab.index')}}">
+                                                <a href="{{route('saisie_etab.index')}}">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Liste des établissements</span>
                                                     <span class="pcoded-mcaret"></span>
@@ -268,7 +268,17 @@
                                                             </a>
                                                         </li>
                                                     </ul>
+                                                   
                                                 </li>
+                                                <li class="#">
+                                                    
+                                                    <a href="{{route('saisie_enregistrement.index')}}">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Réenregistrement</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                
                                             </ul>
                                         </li>
                                     </ul>
