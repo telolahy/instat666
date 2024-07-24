@@ -11,7 +11,8 @@ Ajouter Commu
         <div class="card-block p-0">
             <div class="tab-content card-block">
                 <div class="header" style="padding-bottom: 3%">
-                    <h4 class="title" style="text-align: center">A propos duPropriétaire</h4>
+                    <hr>
+                    <h4 class="title" style="text-align: center">Propriétaire</h4>
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -29,7 +30,7 @@ Ajouter Commu
                     @endif
                     <hr />
                 </div>
-                <form action="{{route('reg_enregistrement.update',$etablissement->id)}}" method="POST" id="proprietaireForm">
+                <form action="{{route('reg_modification.update',$etablissement->id)}}" method="POST" id="proprietaireForm">
                     @csrf
                     @method('PUT')
 
@@ -79,7 +80,7 @@ Ajouter Commu
                       <div class="form-group row">
                           <label class="col-sm-2 col-form-label">Nom Complet : <span style="color: red">*</span></label>
                           <div class="col-sm-10">
-                             <input type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->proprietaires->first()->nom}}" name="nom" id="nom"> 
+                             <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" value="{{$etablissement->proprietaires->first()->nom}}" name="nom" id="nom"> 
                           </div>
                       </div>
                       <div class="form-group row">
@@ -99,7 +100,7 @@ Ajouter Commu
                       <div class="form-group row">
                           <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
                           <div class="col-sm-10">
-                             <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="adresse" id="adresse" value="{{$etablissement->proprietaires->first()->adresse}}"> 
+                             <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="adresse" id="adresse" value="{{$etablissement->proprietaires->first()->adresse}}"> 
                           </div>
                       </div>
                       <div class="form-group row">
@@ -127,28 +128,11 @@ Ajouter Commu
                         </div>
                       <br/><hr/>
                       <div class="header" style="padding-bottom: 3%">
-                            <h4 class="title" style="text-align: center">A propos de l'Etablissement</h4><hr/>
+                            <h4 class="title" style="text-align: center">Etablissement</h4><hr/>
                       </div>
                       <input type="hidden" class="form-control form-control-bold form-control-center" name="num_entreprise"  id="num_entreprise">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Identification :</label>
-                        <div class="col-sm-10">
-                             <input type="text" class="form-control form-control-bold form-control-center" value="{{$identification_stat}}" name="identification_stat" id="identification_stat" readonly>  
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Sigle : <span style="color: red">*</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control form-control-bold form-control-center" placeholder="Sigle" name="sigle" id="sigle" value="{{$etablissement->sigle}}"> 
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse de l'etablissement" name="adresse_etab" id="adresse_etab" value="{{$etablissement->adresse_etab}}"> 
-                        </div>
-                    </div>
-                    <div class="form-group row">
+                   
+                      <div class="form-group row">
                         <div class="col-sm-4">
                             <label class="">Région :</label>
                             <select class="form-control" readonly name="region_etab" id="region_etab">
@@ -177,14 +161,36 @@ Ajouter Commu
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="">  </label>
-                        <label class="col-sm-2 col-form-label">Fond (en 1000 Ar): <span style="color: red">*</span></label>
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Identification :</label>
                         <div class="col-sm-10">
-                            <label class=""></label>
-                            <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "25" name="fond"  id="fond" value="{{$etablissement->fond}}"/> 
+                             <input type="text" class="form-control form-control-bold form-control-center" value="{{$identification_stat}}" name="identification_stat" id="identification_stat" readonly>  
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Sigle : <span style="color: red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" placeholder="Sigle" name="sigle" id="sigle" value="{{$etablissement->sigle}}"> 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" placeholder="Adresse de l'etablissement" name="adresse_etab" id="adresse_etab" value="{{$etablissement->adresse_etab}}"> 
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="">  </label>
+                        <label class="col-sm-2 col-form-label" style="padding-top:18px;">Fond (en 1000 Ar): <span style="color: red">*</span></label>
+                        <div class="col-sm-10">
+                            <label class=""></label>
+                            <input type="number"  class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "25" name="fond"  id="fond" value="{{$etablissement->fond}}"/> 
+                        </div>
+                    </div>
+                    
+
+
                     <div class="form-group row">
                         <div class="col-sm-2">
                             <label class=""></label>
@@ -228,15 +234,34 @@ Ajouter Commu
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
+
+
+                    <br>
+<br>
+                           
+                            <div class="mb-3 row"><h4 style="color:grey;
+                                                            
+                                                            padding-bottom: 5px;
+                                                            padding-top: 5px
+                                                            ">ACTIVITE PRINCIPAL</h4></div>
+                    <!--div class="form-group row">
                           <label class="col-sm-2 col-form-label">Activité Principal : <span style="color: red">*</span></label>
                           <div class="col-sm-10">
                             <div class="col-sm-10">
                                <input type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->activite_princ}}" placeholder="Activité Principal " name="activite_0" id="activite_0"> 
                             </div>
                           </div>
+                    </div-->
+
+                    <div class="mb-3 row">
+                        <label  class="col-sm-2 col-form-label">Activité Principal : <span style="color: red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" value="{{$etablissement->activite_princ}}" placeholder="Activité Principal " name="activite_0" id="activite_0">
+                        </div>
                     </div>
-                    <div class="form-group row">
+
+
+                    <!--div class="form-group row">
                         <div class="col">
                             <label class="">Section:</label>
                             <select class="form-control"  name="section_0" id="section_0">
@@ -245,40 +270,113 @@ Ajouter Commu
                                     <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
                                 @endforeach  
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Section:</label>
+                            <div class="col-sm-10">
+                                
+                                <select style="background-color:grey;" class="form-control"  name="section_0" id="section_0">
+                                    <option  value="{{$section_etab->id}}" selected>{{$section_etab->type_section}}</option>
+                                    @foreach ($sections as $section)
+                                        <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
+                                    @endforeach
+                                </select>
+                                </input>
+                            </div>
+                        </div>  
+
+
+                        <!--div class="col">
                             <label class="">Division :</label>
                             <select class="form-control" name="division_0" id="division_0">
                                  <option value="{{$division_etab->id}}" selected>{{$division_etab->type_division}}</option> 
                             
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Division:</label>
+                            <div class="col-sm-10">
+                                
+                                <select class="form-control"  name="division_0" id="division_0">
+                                    <option value="{{$division_etab->id}}" selected>{{$division_etab->type_division}}</option> 
+
+                                </select>
+                                </input>
+                            </div>
+                        </div>  
+
+
+                        <!--div class="col">
                             <label class="">Groupe :</label>
                             <select class="form-control" name="groupe_0" id="groupe_0">
                                 <option value="{{$groupe_etab->id}}" selected>{{$groupe_etab->type_groupe}}</option> 
 
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Groupe:</label>
+                            <div class="col-sm-10">
+                                
+                                <select class="form-control"  name="groupe_0" id="groupe_0">
+                                    <option value="{{$groupe_etab->id}}" selected>{{$groupe_etab->type_groupe}}</option> 
+
+                                </select>
+                                </input>
+                            </div>
+                        </div>  
+
+
+                        <!--div class="col">
                             <label class="">Classe :</label>
                             <select class="form-control" name="classe_0" id="classe_0">
                                 <option value="{{$classe_etab->id}}" selected>{{$classe_etab->type_classe}}</option> 
 
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Classe:</label>
+                            <div class="col-sm-10">
+                                
+                                <select class="form-control"  name="classe_0" id="classe_0">
+                                    <option value="{{$classe_etab->id}}" selected>{{$classe_etab->type_classe}}</option> 
+
+                                </select>
+                                </input>
+                            </div>
+                        </div>  
+
+
+                        <!--div class="col">
                             <label class="">Categorie :</label>
                             <select class="form-control" name="categorie_0" id="categorie_0">
                                 <option value="{{$categorie_etab->id}}" selected>{{$categorie_etab->type_categorie}}</option> 
 
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group row">
+                    </div-->
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Catégorie:</label>
+                        <div class="col-sm-10">
+                            
+                            <select class="form-control"  name="categorie_0" id="categorie_0">
+                                <option value="{{$categorie_etab->id}}" selected>{{$categorie_etab->type_categorie}}</option> 
+
+                            </select>
+                            </input>
+                        </div>
+                    </div>  
+
+
+                    <br><br>
+                    <div class="mb-3 row"><h4 style="color:grey;
+                                                            
+                        padding-bottom: 5px;
+                        padding-top: 5px
+                        ">ACTIVITE SECONDAIRE I</h4></div>
+                    <!--div class="form-group row">
                         <hr>
-                    </div>
-                    <div class="form-group row">
+                    </div-->
+                    <!--div class="form-group row">
                           <label class="col-sm-2 col-form-label">Activité Secondaire1 :</label>
                           <div class="col-sm-10">
                             <div class="col-sm-10">
@@ -290,10 +388,22 @@ Ajouter Commu
                                 @endif
                             </div>
                           </div>
+                    </div-->
+                    <div class="mb-3 row">
+                        <label  class="col-sm-2 col-form-label">Activité Secondaire 1 :</label>
+                        <div class="col-sm-10">
+                            @if ($etablissement->activite_sec1)
+                                <input onkeyup="this.value = this.value.toUpperCase();" type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->activite_sec1}}" placeholder="Activité secondaire 1 " name="activite_1" id="activite_1">
+                            @else
+                            <input onkeyup="this.value = this.value.toUpperCase();" type="text" class="form-control form-control-bold form-control-center" value="" placeholder="Activité secondaire1 " name="activite_1" id="activite_1"> 
+                                @endif
+                        </div>
                     </div>
-                    <div class="form-group row">
 
-                        <div class="col">
+
+                 
+
+                        <!--div class="col">
                             <label class="">Section:</label>
                             <select class="form-control" name="section_1" id="section_1">
                                 @if($section_sec1)
@@ -305,9 +415,27 @@ Ajouter Commu
                                     <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
                                 @endforeach  
                             </select>
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Section:</label>
+                            <div class="col-sm-10">
+                                
+                                <select style="background-color:grey;" class="form-control"  name="section_1" id="section_1">
+                                    @if($section_sec1)
+                                        <option  value="{{$section_sec1->id}}" selected>{{$section_sec1->type_section}}</option>
+                                    @else
+                                        <option value="">Selectionner une section</option>
+                                    @endif
+                                    @foreach ($sections as $section)
+                                        <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
+                                    @endforeach
+                                </select>
+                                </input>
+                            </div>
                         </div>
 
-                        <div class="col">
+
+                        <!--div class="col">
                             <label class="">Division :</label>
                             <select class="form-control" name="division_1" id="division_1">
                                 @if($section_sec1)
@@ -315,8 +443,21 @@ Ajouter Commu
                                 @endif 
                             
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Division:</label>
+                            <div class="col-sm-10">
+                                
+                            <select class="form-control" name="division_1" id="division_1">
+                                @if($section_sec1)
+                                    <option value="{{$division_sec1->id}}" selected>{{$division_sec1->type_division}}</option>
+                                 @endif 
+                            </select>
+                                </input>
+                            </div>
+                        </div>  
+
+                        <!--div class="col">
                             <label class="">Groupe :</label>
                             <select class="form-control" name="groupe_1" id="groupe_1">
                                 @if($section_sec1)
@@ -324,8 +465,22 @@ Ajouter Commu
                                 @endif 
 
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Groupe:</label>
+                            <div class="col-sm-10">
+                                
+                            <select class="form-control" name="groupe_1" id="groupe_1">
+                                @if($section_sec1)
+                                <option value="{{$groupe_sec1->id}}" selected>{{$groupe_sec1->type_groupe}}</option>
+                            @endif 
+                            </select>
+                                </input>
+                            </div>
+                        </div>  
+
+                        <!--div class="col">
                             <label class="">Classe :</label>
                             <select class="form-control" name="classe_1" id="classe_1">
                                 @if($section_sec1)
@@ -333,8 +488,21 @@ Ajouter Commu
                                 @endif 
 
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Classe:</label>
+                            <div class="col-sm-10">
+                                
+                            <select class="form-control" name="classe_1" id="classe_1">
+                                @if($section_sec1)
+                                    <option value="{{$classe_sec1->id}}" selected>{{$classe_sec1->type_classe}}</option>
+                                @endif 
+                            </select>
+                                </input>
+                            </div>
+                        </div>  
+
+                        <!--div class="col">
                             <label class="">Categorie :</label>
                             <select class="form-control" name="categorie_1" id="categorie_1">
                                 @if($section_sec1)
@@ -342,21 +510,47 @@ Ajouter Commu
                                 @endif
 
                             </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Categorie:</label>
+                            <div class="col-sm-10">
+                                
+                            <select class="form-control" name="categorie_1" id="categorie_1">
+                                @if($section_sec1)
+                                    <option value="{{$categorie_sec1->id}}" selected>{{$categorie_sec1->type_categorie}}</option> 
+                                @endif
+                            </select>
+                                </input>
+                            </div>
+                        </div>  
+
+                        <br><br>
+                        <div class="mb-3 row"><h4 style="color:grey;
+                                                                
+                            padding-bottom: 5px;
+                            padding-top: 5px
+                            ">ACTIVITE SECONDAIRE II</h4></div>
+                    <!--div class="form-group row">
                         <hr>
-                    </div>
-                    <div class="form-group row">
+                    </div-->
+                    <!--div class="form-group row">
                           <label class="col-sm-2 col-form-label">Activité Secondaire2 :</label>
                           <div class="col-sm-10">
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-bold form-control-center" value="{{$etablissement->activite_sec2}}" placeholder="Activité secondaire2" name="activite_2"  id="activite_2"> 
                             </div>
                           </div>
+                    </div-->
+                    <div class="mb-3 row">
+                        <label  class="col-sm-2 col-form-label">Activité Secondaire 2 :</label>
+                        <div class="col-sm-10">
+                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" value="{{$etablissement->activite_sec2}}" placeholder="Activité secondaire 2 " name="activite_2" id="activite_2">
+                        </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col">
+
+
+                    <!--div class="form-group row"-->
+                        <!--div class="col">
                             <label class="">Section:</label>
                             <select class="form-control"  name="section_2" id="section_2">
                                 @if($section_sec2)
@@ -368,8 +562,27 @@ Ajouter Commu
                                     <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
                                 @endforeach  
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Section:</label>
+                            <div class="col-sm-10">
+                                
+                                <select style="background-color:grey;" class="form-control"  name="section_2" id="section_2">
+                                    @if($section_sec2)
+                                        <option  value="{{$section_sec2->id}}" selected>{{$section_sec2->type_section}}</option>
+                                    @else
+                                        <option value="">Selectionner une section</option>
+                                    @endif
+                                    @foreach ($sections as $section)
+                                        <option value="{{$section->id}}">{{$section->code_section}} - {{$section->type_section}}</option>
+                                    @endforeach
+                                </select>
+                                </input>
+                            </div>
+                        </div> 
+
+
+                        <!--div class="col">
                             <label class="">Division :</label>
                             <select class="form-control" name="division_2" id="division_2">
                                 @if($section_sec2)
@@ -377,8 +590,22 @@ Ajouter Commu
                                 @endif 
                             
                             </select>
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Division:</label>
+                            <div class="col-sm-10">
+                            <select class="form-control" name="division_2" id="division_2">
+                                @if($section_sec2)
+                                    <option value="{{$division_sec2->id}}" selected>{{$division_sec2->type_division}}</option>
+                                @endif
+                            </select>
+                                
+                                </input>
+                            </div>
                         </div>
-                        <div class="col">
+
+
+                        <!--div class="col">
                             <label class="">Groupe :</label>
                             <select class="form-control" name="groupe_2" id="groupe_2">
                                 @if($section_sec2)
@@ -386,8 +613,22 @@ Ajouter Commu
                                 @endif
 
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Groupe:</label>
+                            <div class="col-sm-10">
+                            <select class="form-control" name="groupe_2" id="groupe_2">
+                                @if($section_sec2)
+                                    <option value="{{$groupe_sec2->id}}" selected>{{$groupe_sec2->type_groupe}}</option> 
+                                @endif
+                            </select>
+                                
+                                </input>
+                            </div>
+                        </div> 
+
+
+                        <!--div class="col">
                             <label class="">Classe :</label>
                             <select class="form-control" name="classe_2" id="classe_2">
                                 @if($section_sec2)
@@ -395,8 +636,22 @@ Ajouter Commu
                                 @endif 
 
                             </select>
-                        </div>
-                        <div class="col">
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Classe:</label>
+                            <div class="col-sm-10">
+                            <select class="form-control" name="classe_2" id="classe_2">
+                                @if($section_sec2)
+                                    <option value="{{$classe_sec2->id}}" selected>{{$classe_sec2->type_classe}}</option>
+                                @endif
+                            </select>
+                                
+                                </input>
+                            </div>
+                        </div> 
+
+
+                        <!--div class="col">
                             <label class="">Categorie :</label>
                             <select class="form-control" name="categorie_2" id="categorie_2">
                                 @if($section_sec2)
@@ -404,9 +659,22 @@ Ajouter Commu
                                 @endif
 
                             </select>
-                        </div>
+                        </div-->
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Catégorie:</label>
+                            <div class="col-sm-10">
+                            <select class="form-control" name="categorie_2" id="categorie_2">
+                                @if($section_sec2)
+                                <option value="{{$categorie_sec2->id}}" selected>{{$categorie_sec2->type_categorie}}</option> 
+                            @endif
 
-                    </div>
+                            </select>
+                                
+                                </input>
+                            </div>
+                        </div> 
+
+                    <!--/div-->
                     <div class="form-group row">
                         <hr>
                     </div>
@@ -435,7 +703,7 @@ Ajouter Commu
                   <div class="form-group row">
                     <div class="col-sm-2">
                         <label class=""></label>
-                        <label class="">Salariés Malagasy :</label>
+                        <label class="" style="padding-top: 25px">Salariés Malagasy :</label>
                     </div>
                     <div class="col">
                         <label class=""></label>
@@ -457,9 +725,9 @@ Ajouter Commu
                         <input type="number" class="form-control form-control-bold form-control-center" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" name="etranger_f"  id="etranger_f" placeholder="Feminin" value="{{$etablissement->etranger_f}}" /> 
                     </div>
                 </div>
-                    </div><br />
-                    <hr />
-                    <br />
+                    </div>
+                    
+                   
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
@@ -467,6 +735,7 @@ Ajouter Commu
                                 class="btn btn-outline-primary">Modifier</button>
                         </div>
                     </div>
+                    <br>
                 </form>
 
             </div>
