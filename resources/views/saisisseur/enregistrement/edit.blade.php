@@ -464,7 +464,7 @@ Ajouter Commu
                         <label class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
                             <button type="submit"
-                                class="btn btn-outline-primary">Modifier</button>
+                                class="btn btn-outline-primary">Enregistrer</button>
                         </div>
                     </div>
                 </form>
