@@ -130,7 +130,7 @@ class EtablissementController extends Controller
 
     public function list_etab_certificat()
     {
-        $etablissements = Etablissement::getEtabUser();
+        $etablissements = Etablissement::getEtabUser()->where('type', '!=', 'Annulation');
         return view('etablissement.list_etab_obtenir_certificat')->with('etablissements', $etablissements);
     }
 
