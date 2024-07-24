@@ -36,7 +36,7 @@ List Commune
                                         <td>{{$etablissement->proprietaires->first()->cin}}</td>
                                         <td>{{$etablissement->proprietaires->first()->nom}}</td>
                                         <td>
-                                            <a onclick="window.location='{{route('reg_enregistrement.edit',$etablissement->id)}}'" data-toggle="tooltip" title="Modifier cet établissement" class="modifier btn btn-outline-primary rounded-circle" id="">Modifier</a><br/>
+                                            <a onclick="window.location='{{route('reg_enregistrement.edit',$etablissement->id)}}'" data-toggle="tooltip" title="Modifier cet établissement" class="modifier btn btn-outline-primary rounded-circle" id="">Reenregistrer</a><br/>
                                         </td>
                                      </tr>  
                                 @endforeach  

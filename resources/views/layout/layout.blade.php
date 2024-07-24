@@ -274,7 +274,7 @@
                                                     
                                                     <a href="{{route('saisie_enregistrement.index')}}">
                                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Réenregistrement</span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Renouvellement</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
@@ -390,7 +390,7 @@
                                     {{-- <a href={{URL::to('/reg_enregistrement')}}> --}}
                                         <a href="{{route('reg_enregistrement.index')}}">
                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Réenregistrement</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Renouvellement</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
