@@ -88,15 +88,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Sigle : <span style="color: red">*</span></label>
+                            <label class="col-sm-2 col-form-label" >Sigle : <span style="color: red">*</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Sigle" name="sigle" value="{{ old('sigle') }}" id="sigle">
+                                <input type="text" onkeyup="this.value = this.value.toUpperCase();"class="form-control form-control-bold form-control-center" placeholder="Sigle" name="sigle" value="{{ old('sigle') }}" id="sigle">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse de l'etablissement" name="adresse_etab" value="{{ old('adresse_etab') }}" id="adresse_etab">
+                                <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" placeholder="Adresse de l'etablissement" name="adresse_etab" value="{{ old('adresse_etab') }}" id="adresse_etab">
                             </div>
                         </div>
                         
@@ -181,7 +181,7 @@
                         <div class="mb-3 row">
                         <label  class="col-sm-2 col-form-label">Activité Principal : <span style="color: red">*</span></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité Principal " name="activite_0" id="activite_0">
+                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" placeholder="Activité Principal " name="activite_0" id="activite_0">
                             </div>
                         </div>
 
@@ -293,7 +293,7 @@
                         <div class="mb-3 row">
                             <label  class="col-sm-2 col-form-label">Activité Secondaire 1 :</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire 1 " name="activite_1" id="activite_1">
+                                <input onkeyup="this.value = this.value.toUpperCase();" type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire 1 " name="activite_1" id="activite_1">
                             </div>
                         </div>
 
@@ -407,7 +407,7 @@
                         <div class="mb-3 row">
                             <label  class="col-sm-2 col-form-label">Activité Secondaire 2 :</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire 2 " name="activite_2" id="activite_2">
+                                <input onkeyup="this.value = this.value.toUpperCase();" type="text" class="form-control form-control-bold form-control-center" placeholder="Activité secondaire 2 " name="activite_2" id="activite_2">
                             </div>
                         </div>
 

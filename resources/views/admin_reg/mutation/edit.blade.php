@@ -117,7 +117,7 @@
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Nom Complet : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control form-control-bold form-control-center" placeholder="Nom complet " name="nom" id="nom" >
+                                      <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" placeholder="Nom complet " name="nom" id="nom" >
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -136,7 +136,7 @@
                               <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Adresse : <span style="color: red">*</span></label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="adresse" id="adresse" >
+                                      <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-bold form-control-center" placeholder="Adresse" name="adresse" id="adresse" >
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -161,8 +161,8 @@
                                   
                                   
                                   
-                                  <br/>
-                            <hr/>
+                                <br>    
+                            
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label"></label>
                                 <div class="col-sm-10" >
@@ -170,6 +170,7 @@
                                     <button type="submit" class="btn btn-outline-primary">Mutation</button>
                                 </div>
                             </div>
+                            
                               {{-- <div class="header" style="padding-bottom: 3%">
                                     <h4 class="title" style="text-align: center">Droit de Mutation </h4><hr/>
                               </div> --}}
