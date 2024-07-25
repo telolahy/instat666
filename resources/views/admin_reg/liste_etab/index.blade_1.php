@@ -13,7 +13,7 @@ List Commune
     <div class="card-block p-0">
       <div class="tab-content card-block">
         <div class="header d-flex justify-content-between align-items-center" style="padding-bottom: 3%">
-          <h4 class="title" style="text-align: center">Liste des établissements :</h4>
+          <h4 class="title" style="text-align: center">Liste des établissements ttt:</h4>
           @if ($errors->any())
           <div class="alert alert-danger">
               <ul>

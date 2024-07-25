@@ -1,0 +1,36 @@
+// public/js/disableButtons.js
+
+// Fonction pour désactiver les deux liens
+function disableLinks() {
+    var link1 = document.getElementById('disable-link');
+    var link2 = document.getElementById('disable-rectification');
+    
+    if (link1) {
+        link1.style.pointerEvents = 'none';  // Désactive le lien
+        link1.style.opacity = '0.5';  // Facultatif : rend le lien visuellement désactivé
+        link1.innerHTML = '<i class="icofont icofont-info-square"></i> Désactivé';  // Change le texte du lien
+    }
+    
+    if (link2) {
+        link2.style.pointerEvents = 'none';  // Désactive le lien
+        link2.style.opacity = '0.5';  // Facultatif : rend le lien visuellement désactivé
+        link2.innerHTML = '<i class="icofont icofont-info-square"></i> Désactivé';  // Change le texte du lien
+    }
+
+    localStorage.setItem('linksDisabled', 'true');  // Enregistre l'état dans le stockage local
+}
+
+// Vérifie l'état des liens au chargement de la page
+window.onload = function() {
+    if (localStorage.getItem('linksDisabled') === 'true') {
+        disableLinks();
+    } else {
+        // Désactive les liens après 1 minute (60000 millisecondes)
+        setTimeout(disableLinks, 10000);
+    }
+};
+
+// Réinitialise l'état des liens si le statut est "En attente"
+if (document.getElementById('en-attente-elements')) {
+    localStorage.removeItem('linksDisabled');
+}

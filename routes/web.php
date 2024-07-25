@@ -243,6 +243,8 @@ Route::middleware(['auth'])->group(function () {
 
     //etablissement
     Route::resource('reg_etab', Admin_reg_EtablissementController::class);
+    Route::get('reg_etab/{id}/rectification', [Admin_reg_EtablissementController::class, 'rectification'])->name('reg_etab.rectification');
+    Route::post('reg_etab/{id}/rectifie', [Admin_reg_EtablissementController::class, 'rectifie'])->name('reg_etab.rectifie');
     Route::get('/search_list', [Admin_reg_EtablissementController::class, 'ft_search'])->name('search_list');
     Route::resource('quitance_reg',Quitance_regController::class);
     Route::get('quitance_reg_form',[Quitance_regController::class, 'affiche_form_quitance'])->name('quitance_reg_form');
