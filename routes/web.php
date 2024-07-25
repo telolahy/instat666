@@ -62,7 +62,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     
-   Route::get('/delete', [DeleteController::class, 'delete']);
+//    Route::get('/delete', [DeleteController::class, 'delete']);
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
