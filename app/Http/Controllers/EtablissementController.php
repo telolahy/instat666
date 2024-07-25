@@ -114,8 +114,8 @@ class EtablissementController extends Controller
 
         ini_set('max_execution_time', 600);
         $tab = explode("-", $etablissement->identification_stat);
-        $activite = $etablissement->activite->categorie;
-        $lien = $etablissement->proprietaire->lien;
+        $activite = $etablissement->activite_princ;
+        $lien = $etablissement->proprietaires->lien;
         $date_now = Carbon::now()->isoFormat('DD/MM/YYYY');
         $region = $tab[0];
         $annee = $tab[1];

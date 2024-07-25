@@ -29,7 +29,7 @@
                                     </div>
                                 @endif
                             </div>
-                     
+                      
                           {{-- {!! Form::open(['action' => 'App\Http\Controllers\QuitanceController@ajout_quitance', 'method' => 'POST']) !!} --}}
                           <form action="{{route('quitance_reg_form_ft')}}" method="post">
                               {{ csrf_field() }} 
@@ -80,14 +80,15 @@
                             </form>
                         
                     
-                          <a href='{{route('carte_state',$etablissement->id)}}' class="btn btn-success btn-outline-success" style="margin: auto; display: none" id="carte_statistique"><i class="icofont icofont-info-square"></i> Carte statistique </a> 
+                          <a href='{{route('carte_state',$etablissement->id)}}' class="btn btn-success btn-outline-success" style="margin: auto; display: none" id="carte_statistique"><i class="icofont icofont-info-square"></i> Carte statistique</a> 
                           {{-- <a href={{URL::to('/list_etablissement')}} class="btn btn-warning btn-outline-warning" style="margin-left: 60%;display: none" id="retour_liste"><i class="icofont icofont-exchange"></i> Revenir à la liste </a> --}}
                           {{-- <a href="{{route('reg_etab.index')}}" class="btn btn-warning btn-outline-warning" style="display: inline;margin-left: 85%"><i class="icofont icofont-exchange"></i> Retour </a> --}}
                           @endif
                           @if ($etablissement->status == "Validé")
             
                            {{-- <a href="{{ route('carte', $etablissement->id) }}" class="btn btn-danger btn-outline-danger" style="margin: auto; display: inline"><i class="icofont icofont-info-square"></i> Carte statistique </a>  --}}
-                            <a href='{{route('carte_state',$etablissement->id)}}' class="btn btn-success btn-outline-success" style="margin: auto; display: inline"><i class="icofont icofont-info-square"></i> Carte statistique </a> 
+                            <a href='{{route('carte_state',$etablissement->id)}}' class="btn btn-success btn-outline-success" style="margin: auto; display: inline"><i class="icofont icofont-info-square"></i> Carte statistique tt</a> 
+                            <a href='{{route('cumule',$etablissement->id)}}' class="btn btn-success btn-success ml-5" style="margin: auto; display: inline"><i class="icofont icofont-info-square"></i> Cumuler </a> 
                             {{-- <a href="{{route('reg_etab.index')}}" class="btn btn-warning btn-outline-warning" style="display: inline;margin-left: 85%"><i class="icofont icofont-exchange"></i> Retour </a> --}}
                             {{-- <a href={{URL::to('/list_etablissement')}} class="btn btn-warning btn-outline-warning" style="margin-left: 60%;display: inline"><i class="icofont icofont-exchange" ></i> Revenir à la liste </a> --}}
                           @endif

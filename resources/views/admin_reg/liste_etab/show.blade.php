@@ -71,9 +71,14 @@ List Commune
                     </div>
                 @else
                     <div id="non-attente-elements" class="d-flex justify-content-arround">
-                        <button onclick="window.location='{{ url('/carte_statistique/'.$etablissement->id) }}'" class="btn btn-info btn-outline-info" id="disable-link" style="display: inline">
+                        {{-- {{route('quitance_reg_form_ft')}} --}}
+                        <form action="{{route('carte_state',$etablissement->id)}}" method="post">
+                            {{ csrf_field() }} 
+                            @method('GET')
+                        <button type="submit" class="btn btn-info btn-outline-info" id="disable-link" style="display: inline">
                             <i class="icofont icofont-exchange"></i> Carte Statistique
                         </button>
+                    </form>
                         <a href="{{ route('reg_etab.rectification', $etablissement->id) }}" class="btn btn-danger btn-outline-danger" id="disable-rectification" style="display: inline">
                             <i class="icofont icofont-exchange"></i> Rectifier
                         </a>
@@ -110,7 +115,7 @@ List Commune
                             disableLinks();
                         } else {
                             // Désactive les liens après 1 minute (60000 millisecondes) // 86 400 000 = 1 jours
-                            setTimeout(disableLinks, 86400000);
+                            setTimeout(disableLinks, 1 * 86400000);
                         }
                     };
                 

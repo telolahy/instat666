@@ -19,14 +19,13 @@ class Quitance_regController extends Controller
 
     public function carte_statistique($id)
     {
-
         $etablissement = Etablissement::with('proprietaires')->find($id);
 
         $activite_desc= $etablissement->get_first_25_words($etablissement->activite_princ);
         $activite_desc1= $etablissement->get_first_25_words($etablissement->activite_sec1);
         $activite_desc2= $etablissement->get_first_15_words($etablissement->activite_sec2);
 
-
+ 
     
         $data ="INSTAT MADAGASCAR"."\n"."Sigle: ".$etablissement->sigle."\n"."Nom Proprietaire: ". $etablissement->proprietaires->first()->nom."\n"."Adresse Etab: ".$etablissement->adresse_etab. "\n"."CIN :". $etablissement->proprietaires->first()->cin;
         //$qrcode = QrCode::size(100)->generate($sigle);

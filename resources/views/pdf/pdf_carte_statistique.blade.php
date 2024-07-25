@@ -198,7 +198,7 @@
             }
             .div_activite {
                 width: 98.5%;
-                height: 21%;
+                height: 25%;
                 border-style: solid;
                 border-width: 0.5px;
                 margin-left: 0.5%;

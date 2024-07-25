@@ -23,6 +23,7 @@ use App\Http\Controllers\JuridiqueController;
 use App\Http\Controllers\casacade_0Controller;
 use App\Http\Controllers\casacade_1Controller;
 use App\Http\Controllers\casacade_2Controller;
+use App\Http\Controllers\ImpressionCarteGroupe;
 use App\Http\Controllers\MutantExistController;
 use App\Http\Controllers\NationaliteController;
 use App\Http\Controllers\DropdownEtabController;
@@ -34,13 +35,13 @@ use App\Http\Controllers\Admin_reg_AjoutController;
 use App\Http\Controllers\AjoutSaisisseurController;
 use App\Http\Controllers\Admin_reg_MutationController;
 use App\Http\Controllers\ReenregistrementRegController;
+use App\Http\Controllers\saisie_EtablissementController;
 use App\Http\Controllers\AjoutAdminRegExistantController;
 use App\Http\Controllers\Admin_reg_modificationController;
 use App\Http\Controllers\ReenregistrementSaisieController;
 use App\Http\Controllers\Admin_reg_EtablissementController;
 use App\Http\Controllers\AjoutSaisisseurExistantController;
 use App\Http\Controllers\AdminRegMutationExistantController;
-use App\Http\Controllers\saisie_EtablissementController;
 
 
 Route::get('/', function () {
@@ -268,7 +269,9 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-  
+    Route::get('cumule/{id}', [ImpressionCarteGroupe::class, 'cumule'])->name('cumule');
+    Route::get('cumule_index', [ImpressionCarteGroupe::class, 'cumule_index'])->name('cumule_index');
+    Route::get('impression_index', [ImpressionCarteGroupe::class, 'impression_index'])->name('impression_index');
     
 });
 
