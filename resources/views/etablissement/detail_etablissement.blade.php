@@ -44,7 +44,7 @@ List Commune
                   <div >
                     @if ($etablissement->status == "En attente")
                         <button onclick="window.location='{{url('/form_quitance/'.$etablissement->id)}}'" class="btn btn-info btn-outline-info" style="display: inline"><i class="icofont icofont-info-square"></i> Valider l'etablissement </button>
-                        <button onclick="window.location='{{url('/form_edit/'.$etablissement->id)}}'" class="btn btn-danger btn-outline-danger" style="display: inline;margin-left: 23%"><i class="icofont icofont-info-square"></i> Rectifier </button>
+                        <button onclick="window.location='{{url('/form_edit/'.$etablissement->id)}}'" class="btn btn-danger btn-outline-danger" style="display: inline;margin-left: 23%"><i class="icofont icofont-info-square"></i> Rectifier </button> 
                         <a href={{URL::to('/list_etablissement')}} class="btn btn-warning btn-outline-warning" style="display: inline;margin-left: 23%"><i class="icofont icofont-exchange"></i> Retour </a>                        
                     @else
                         <a href={{URL::to('/list_etablissement')}} class="btn btn-warning btn-outline-warning" style="display: inline;margin-left: 85%"><i class="icofont icofont-exchange"></i> Retour </a>

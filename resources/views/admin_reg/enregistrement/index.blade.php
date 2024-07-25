@@ -13,12 +13,12 @@ List Commune
         <div class="card-block p-0">
             <div class="tab-content card-block">
                 <div class="header" style="padding-bottom: 3%">
-                    <h4 class="title" style="text-align: center">Liste des établissements avec son propriétaire :</h4>
+                    <h4 class="title" style="text-align: center">Liste des établissements avec son propriétaire :</h4>  
                 </div>
 
                 <div class="card-block table-border-style">
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped"> 
                             <thead>
                                 <tr>
                                     <th>Identification</th>

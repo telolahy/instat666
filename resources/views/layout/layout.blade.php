@@ -1083,6 +1083,7 @@
         <script src="{{asset('js/cascade_0.js')}}"></script>
         <script src="{{asset('js/cascade_1.js')}}"></script>
         <script src="{{asset('js/cascade_ 2.js')}}"></script>
+        <script src="{{asset('js/desactive_boutton.js')}}"></script>
         @yield('script')
 
     </body>
